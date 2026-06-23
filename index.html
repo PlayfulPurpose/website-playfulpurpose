@@ -118,7 +118,6 @@
     .spinning-word {
       display: inline-block;
       color: var(--orange);
-      min-width: 5ch;
       transition: opacity 0.35s ease, transform 0.35s ease;
     }
 
@@ -135,6 +134,11 @@
     .spinning-word.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    .logo-dot {
+      color: #FFD258;
+      font-weight: 900;
     }
 
     .hero-sub {
@@ -300,22 +304,39 @@
 
     .logo-item:hover { color: var(--orange); }
 
-    /* ── TESTIMONIALS ── */
+    /* ── TESTIMONIALS CAROUSEL ── */
     #testimonials { background: var(--offwhite); }
 
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+    .carousel-wrap {
+      position: relative;
+      max-width: 720px;
+      margin: 3rem auto 0;
+    }
+
+    .carousel-track {
+      position: relative;
+      min-height: 280px;
     }
 
     .testimonial-card {
       background: var(--white);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 2.5rem;
       border-left: 4px solid var(--orange);
-      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      opacity: 0;
+      transform: translateX(24px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+    }
+
+    .testimonial-card.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      position: relative;
     }
 
     .testimonial-card.red-accent  { border-left-color: var(--red); }
@@ -333,10 +354,11 @@
     .testimonial-card.lime-accent .quote-mark { color: var(--lime); }
 
     .testimonial-card blockquote {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #444;
       line-height: 1.85;
       margin-bottom: 1.5rem;
+      min-height: 5.5rem;
     }
 
     .testimonial-attribution {
@@ -354,6 +376,56 @@
     .testimonial-attribution span {
       font-size: 0.8rem;
       color: var(--muted);
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .carousel-arrow {
+      background: var(--white);
+      border: 1.5px solid #DDDDDD;
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .carousel-arrow:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .carousel-dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #DDDDDD;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--orange);
+      transform: scale(1.2);
     }
 
     /* ── ABOUT ── */
@@ -607,7 +679,7 @@
 
     .form-group input,
     .form-group textarea {
-      font-family: \'Poppins\', sans-serif;
+      font-family: 'Poppins', sans-serif;
       font-size: 0.95rem;
       padding: 0.75rem 1rem;
       border: 1.5px solid #DDDDDD;
@@ -679,7 +751,7 @@
   <section id="home">
     <p class="hero-eyebrow">Julie Trell - Chief Play Officer</p>
     <h1 class="hero-headline">
-      The future<br>of work is<br><span class="spinning-word visible" id="spinner">play</span>
+      The future<br>of work is<br><span class="spinning-word visible" id="spinner">play</span><span class="logo-dot">.</span>
     </h1>
     <p class="hero-sub">
       I help people stay human in an AI world - building the connection, creativity, and relationships that technology can't replace.
@@ -743,50 +815,58 @@
     <span class="section-label fade-up">What people say</span>
     <h2 class="section-headline fade-up">The sceptics become the converts.</h2>
 
-    <div class="testimonial-grid">
-      <div class="testimonial-card fade-up">
-        <div class="quote-mark">"</div>
-        <blockquote>Julie led improv games at our executive offsite. I was hesitant this kind of activity would be relevant for team building. Despite my scepticism, not only were they fun, they strengthened our ability to collaborate. In the end I saw the value and was keen to try these exercises with my own teams.</blockquote>
-        <div class="testimonial-attribution">
-          <strong>Freddie Jansen van Nieuwenhuizen</strong>
-          <span>Former Telstra Executive</span>
+    <div class="carousel-wrap fade-up">
+      <div class="carousel-track" id="carousel-track">
+        <div class="testimonial-card active" data-index="0">
+          <div class="quote-mark">"</div>
+          <blockquote>Julie led improv games at our executive offsite. I was hesitant this kind of activity would be relevant for team building. Despite my scepticism, not only were they fun, they strengthened our ability to collaborate. In the end I saw the value and was keen to try these exercises with my own teams.</blockquote>
+          <div class="testimonial-attribution">
+            <strong>Freddie Jansen van Nieuwenhuizen</strong>
+            <span>Former Telstra Executive</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card red-accent" data-index="1">
+          <div class="quote-mark">"</div>
+          <blockquote>Big thanks to Julie Trell from Playful Purpose for creating such a safe and engaging environment. We left the session more connected, more aligned, and with a renewed appreciation for the power of play in learning and leadership.</blockquote>
+          <div class="testimonial-attribution">
+            <strong>Siva Navaratnam</strong>
+            <span>Head of Strategic Partnerships, ANZ</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card lime-accent" data-index="2">
+          <div class="quote-mark">"</div>
+          <blockquote>Julie builds on her years of experience with startups and corporates in presenting a workshop so engaging that you lose track of how much you learn so fast. A great session ahead of hard conversations and negotiations. Thoroughly recommend.</blockquote>
+          <div class="testimonial-attribution">
+            <strong>Joanne Jacobs</strong>
+            <span>Co-CEO, Disruptors Co (at CSIRO)</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card" data-index="3">
+          <div class="quote-mark">"</div>
+          <blockquote>I observe a lot of these workshops from the back of the room, and I have never witnessed so much positive energy in a room before! I love your facilitation style - inclusive, respectful, and empathetic. You read the room exceptionally well and ensured everyone felt included.</blockquote>
+          <div class="testimonial-attribution">
+            <strong>Kate</strong>
+            <span>Careers Corporate Relations Manager, MBA Programs</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card red-accent" data-index="4">
+          <div class="quote-mark">"</div>
+          <blockquote>Julie's techniques of "Yes, And" and "What I Like About That" have been transformative. Using these practices with my team has made everything more productive and positive. These are invaluable tools.</blockquote>
+          <div class="testimonial-attribution">
+            <strong>Claudia Holt</strong>
+            <span>Founder, Wild Yeast Zoo</span>
+          </div>
         </div>
       </div>
 
-      <div class="testimonial-card red-accent fade-up">
-        <div class="quote-mark">"</div>
-        <blockquote>Big thanks to Julie Trell from Playful Purpose for creating such a safe and engaging environment. We left the session more connected, more aligned, and with a renewed appreciation for the power of play in learning and leadership.</blockquote>
-        <div class="testimonial-attribution">
-          <strong>Siva Navaratnam</strong>
-          <span>Head of Strategic Partnerships, ANZ</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card lime-accent fade-up">
-        <div class="quote-mark">"</div>
-        <blockquote>Julie builds on her years of experience with startups and corporates in presenting a workshop so engaging that you lose track of how much you learn so fast. A great session ahead of hard conversations and negotiations. Thoroughly recommend.</blockquote>
-        <div class="testimonial-attribution">
-          <strong>Joanne Jacobs</strong>
-          <span>Co-CEO, Disruptors Co (at CSIRO)</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card fade-up">
-        <div class="quote-mark">"</div>
-        <blockquote>I observe a lot of these workshops from the back of the room, and I have never witnessed so much positive energy in a room before! I love your facilitation style - inclusive, respectful, and empathetic. You read the room exceptionally well and ensured everyone felt included.</blockquote>
-        <div class="testimonial-attribution">
-          <strong>Kate</strong>
-          <span>Careers Corporate Relations Manager, MBA Programs</span>
-        </div>
-      </div>
-
-      <div class="testimonial-card red-accent fade-up">
-        <div class="quote-mark">"</div>
-        <blockquote>Julie's techniques of "Yes, And" and "What I Like About That" have been transformative. Using these practices with my team has made everything more productive and positive. These are invaluable tools.</blockquote>
-        <div class="testimonial-attribution">
-          <strong>Claudia Holt</strong>
-          <span>Founder, Wild Yeast Zoo</span>
-        </div>
+      <div class="carousel-controls">
+        <button class="carousel-arrow" id="carousel-prev" aria-label="Previous testimonial">←</button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <button class="carousel-arrow" id="carousel-next" aria-label="Next testimonial">→</button>
       </div>
     </div>
   </section>
@@ -851,7 +931,7 @@
     <div style="max-width: 640px; margin: 0 auto;">
       <span class="section-label fade-up">Get in touch</span>
       <h2 class="section-headline fade-up">Say hello.</h2>
-      <p class="fade-up" style="color: #888; font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.75;">Not ready to book a call yet? No worries. Drop me a message and let\'s start the conversation.</p>
+      <p class="fade-up" style="color: #888; font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.75;">Not ready to book a call yet? No worries. Drop me a message and let's start the conversation.</p>
 
       <form action="https://formspree.io/f/xjgdjqwj" method="POST" class="contact-form fade-up">
         <div class="form-row">
@@ -870,17 +950,17 @@
         </div>
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" name="message" required placeholder="What\'s on your mind?" rows="4"></textarea>
+          <textarea id="message" name="message" required placeholder="What's on your mind?" rows="4"></textarea>
         </div>
         <div class="form-group">
-          <label for="grateful">What\'s one thing you\'re grateful for today? <span class="optional">(optional)</span></label>
-          <input type="text" id="grateful" name="grateful" placeholder="Big or small, doesn\'t matter" />
+          <label for="grateful">What's one thing you're grateful for today? <span class="optional">(optional)</span></label>
+          <input type="text" id="grateful" name="grateful" placeholder="Big or small, doesn't matter" />
         </div>
         <div class="form-group">
           <label for="fun">Comments, jokes, puns or random facts <span class="optional">(optional)</span></label>
           <textarea id="fun" name="fun" placeholder="Go on then..." rows="2"></textarea>
         </div>
-        <button type="submit" class="btn-primary" style="border: none; cursor: pointer; font-family: \'Poppins\', sans-serif; font-size: 1rem;">Let\'s play</button>
+        <button type="submit" class="btn-primary" style="border: none; cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 1rem;">Let's play</button>
       </form>
     </div>
   </section>
@@ -935,6 +1015,49 @@
     }
 
     setInterval(nextWord, 2200);
+
+    // Testimonial carousel
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dotsWrap = document.getElementById('carousel-dots');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const carouselWrap = document.querySelector('.carousel-wrap');
+    let activeIndex = 0;
+    let carouselTimer;
+
+    cards.forEach((card, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+      dot.addEventListener('click', () => goToSlide(i));
+      dotsWrap.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function goToSlide(index) {
+      cards[activeIndex].classList.remove('active');
+      dots[activeIndex].classList.remove('active');
+      activeIndex = (index + cards.length) % cards.length;
+      cards[activeIndex].classList.add('active');
+      dots[activeIndex].classList.add('active');
+    }
+
+    function startCarousel() {
+      carouselTimer = setInterval(() => goToSlide(activeIndex + 1), 5000);
+    }
+
+    function stopCarousel() {
+      clearInterval(carouselTimer);
+    }
+
+    prevBtn.addEventListener('click', () => { goToSlide(activeIndex - 1); stopCarousel(); startCarousel(); });
+    nextBtn.addEventListener('click', () => { goToSlide(activeIndex + 1); stopCarousel(); startCarousel(); });
+
+    carouselWrap.addEventListener('mouseenter', stopCarousel);
+    carouselWrap.addEventListener('mouseleave', startCarousel);
+
+    startCarousel();
 
     // Fade in on scroll
     const observer = new IntersectionObserver((entries) => {

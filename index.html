@@ -91,6 +91,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: flex-start;
       padding: 10rem 5vw 6rem;
       position: relative;
       overflow: hidden;
@@ -162,7 +163,7 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .btn-primary:hover { background: #e0820f; transform: translateY(-2px); }
+    .btn-primary:hover { background: #e0820f; }
 
     /* ── SECTION BASE ── */
     section { padding: 6rem 5vw; }
@@ -273,7 +274,24 @@
       font-size: 0.95rem;
       color: var(--muted);
       line-height: 1.8;
+      margin-bottom: 1.5rem;
     }
+
+    .service-solution {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .service-card.featured .service-solution { color: var(--orange); }
+    .service-card.speaking .service-solution { color: var(--red); }
+    .service-card.workshops .service-solution { color: var(--lime); }
 
     /* ── LOGOS ── */
     #logos {
@@ -315,7 +333,7 @@
 
     .carousel-track {
       position: relative;
-      min-height: 280px;
+      min-height: 340px;
     }
 
     .testimonial-card {
@@ -336,7 +354,6 @@
       opacity: 1;
       transform: translateX(0);
       pointer-events: auto;
-      position: relative;
     }
 
     .testimonial-card.red-accent  { border-left-color: var(--red); }
@@ -778,20 +795,23 @@
     <div class="services-grid">
       <div class="service-card featured fade-up">
         <span class="service-tag lead">Lead offer</span>
-        <h3>Fractional Chief Play Officer</h3>
-        <p>I embed in your organisation on a retainer basis - not a one-off workshop, not a team day. I become part of how your culture works. Building the human skills that make your people better listeners, better collaborators, and better at the things AI genuinely cannot do.</p>
+        <h3>Your culture is quietly breaking.</h3>
+        <p>I embed in your organisation on a retainer basis. Not a one-off workshop, not a team day. When people leave and roles shift, the human gaps get real. I help you find the right people and build the processes to keep humans genuinely in the loop.</p>
+        <span class="service-solution">Fractional Chief Play Officer</span>
       </div>
 
       <div class="service-card speaking fade-up">
         <span class="service-tag speak">Speaking</span>
-        <h3>Keynotes and Speaking</h3>
+        <h3>Your people are scared of what's coming.</h3>
         <p>Interactive talks that don't just inform - they change how people think about play, work, and what it means to stay human in an AI world. Built for HR conferences, leadership events, and company offsites.</p>
+        <span class="service-solution">Keynotes and Speaking</span>
       </div>
 
       <div class="service-card workshops fade-up">
         <span class="service-tag work">Workshops</span>
-        <h3>Workshops and Facilitation</h3>
+        <h3>Training doesn't actually change behaviour.</h3>
         <p>Hands-on sessions using Applied Improvisation to build real skills - communication, trust, collaboration, creative problem solving. Designed for teams who want something that sticks, not just a good day out.</p>
+        <span class="service-solution">Workshops and Facilitation</span>
       </div>
     </div>
   </section>
@@ -849,7 +869,7 @@
           <blockquote>I observe a lot of these workshops from the back of the room, and I have never witnessed so much positive energy in a room before! I love your facilitation style - inclusive, respectful, and empathetic. You read the room exceptionally well and ensured everyone felt included.</blockquote>
           <div class="testimonial-attribution">
             <strong>Kate</strong>
-            <span>Careers Corporate Relations Manager, MBA Programs</span>
+            <span>Careers Corporate Relations Manager, MBA Programs, University of Sydney</span>
           </div>
         </div>
 
@@ -1044,7 +1064,7 @@
     }
 
     function startCarousel() {
-      carouselTimer = setInterval(() => goToSlide(activeIndex + 1), 5000);
+      carouselTimer = setInterval(() => goToSlide(activeIndex + 1), 8000);
     }
 
     function stopCarousel() {

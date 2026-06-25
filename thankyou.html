@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sent. We'll talk soon. - Playful Purpose</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #F7941D;
+      --red: #E31E24;
+      --lime: #8DC63F;
+      --blue: #1B3A8C;
+      --white: #FFFFFF;
+      --text: #1a1a1a;
+      --muted: #888;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #FFFFFF;
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      padding: 1.25rem 5vw;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-logo-img { height: 52px; width: auto; }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 5vw;
+    }
+
+    .thankyou-inner {
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .sent-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    h1 span { color: var(--orange); }
+
+    .talk-soon {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    .question-block {
+      background: #1B3A8C;
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: left;
+    }
+
+    .question-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .question {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.6;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 2.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    footer {
+      padding: 2rem 5vw;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img class="nav-logo-img" src="og-image.png" alt="Playful Purpose" />
+    </a>
+  </nav>
+
+  <main>
+    <div class="thankyou-inner">
+      <span class="sent-label">Message received</span>
+      <h1>Sent. We'll talk <span>soon.</span></h1>
+      <p class="talk-soon">Julie will be in touch within 48 hours.</p>
+
+      <div class="question-block">
+        <span class="question-label">Before we speak, sit with this</span>
+        <p class="question">What's one thing your team would do differently tomorrow if they had no fear of failing?</p>
+      </div>
+
+      <a href="/" class="back-link">← Back to Playful Purpose</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; Playful Purpose · julie@playfulpurpose.com
+  </footer>
+
+</body>
+</html>

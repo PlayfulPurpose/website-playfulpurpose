@@ -1055,8 +1055,7 @@
       <h2 class="section-headline fade-up">Say hello.</h2>
       <p class="fade-up" style="color: #888; font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.75;">Not ready to book a call yet? No worries. Drop me a message and let's start the conversation.</p>
 
-      <form action="https://formspree.io/f/xjgdjqwj" method="POST" class="contact-form fade-up">
-        <input type="hidden" name="_next" value="https://playfulpurpose.com/thankyou.html" />
+      <form id="contact-form" action="https://formspree.io/f/xjgdjqwj" method="POST" class="contact-form fade-up">
         <div class="form-row">
           <div class="form-group">
             <label for="name">Name</label>
@@ -1194,6 +1193,27 @@
         hamburger.classList.remove('open');
         navLinks.classList.remove('open');
       });
+    });
+
+    // Contact form - submit via fetch, redirect to thank you page
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(contactForm);
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          window.location.href = '/thankyou.html';
+        } else {
+          alert('Something went wrong. Please try again or email julie@playfulpurpose.com directly.');
+        }
+      } catch {
+        alert('Something went wrong. Please try again or email julie@playfulpurpose.com directly.');
+      }
     });
 
     // Fade in on scroll

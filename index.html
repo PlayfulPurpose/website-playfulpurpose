@@ -392,7 +392,6 @@
 
     .carousel-track {
       position: relative;
-      min-height: 340px;
     }
 
     .testimonial-card {
@@ -419,11 +418,13 @@
     .testimonial-card.lime-accent { border-left-color: var(--lime); }
 
     .quote-mark {
-      font-size: 2.5rem;
+      font-size: 6rem;
       color: var(--orange);
-      line-height: 1;
-      margin-bottom: 0.25rem;
+      line-height: 0.6;
+      margin-bottom: 1rem;
       font-family: Georgia, serif;
+      display: block;
+      opacity: 0.25;
     }
 
     .testimonial-card.red-accent .quote-mark  { color: var(--red); }
@@ -1191,6 +1192,21 @@
 
     carouselWrap.addEventListener('mouseenter', stopCarousel);
     carouselWrap.addEventListener('mouseleave', startCarousel);
+
+    function setTrackHeight() {
+      const track = document.getElementById('carousel-track');
+      let maxH = 0;
+      cards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.position = 'relative';
+        maxH = Math.max(maxH, card.offsetHeight);
+        card.style.opacity = '';
+        card.style.position = '';
+      });
+      track.style.minHeight = maxH + 'px';
+    }
+    setTrackHeight();
+    window.addEventListener('resize', setTrackHeight);
 
     startCarousel();
 

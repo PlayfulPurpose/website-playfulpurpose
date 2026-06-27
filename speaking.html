@@ -164,13 +164,67 @@
     <div class="section-inner">
       <span class="section-label">A good fit for</span>
       <h2 class="section-headline">Who books me to speak.</h2>
-      <div class="for-list" style="margin-top: 2rem;">
-        <div class="for-item">Conference organisers wanting a memorable, interactive session</div>
-        <div class="for-item">Leadership teams running company offsites or strategy days</div>
-        <div class="for-item">L&D teams looking for something different to open or close a program</div>
-        <div class="for-item">Startup ecosystems and accelerators (CSIRO ON, Disruptors Co)</div>
-        <div class="for-item">HR teams building culture and engagement programs</div>
+
+      <div class="accordion" style="margin-top: 2rem;">
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Conference organisers</strong> wanting a memorable, interactive session</button>
+          <div class="accordion-body">Most keynotes are passive. People sit, someone talks, everyone claps and goes home unchanged. If you want a session people are still talking about at dinner, this is it.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Leadership teams</strong> running company offsites or strategy days</button>
+          <div class="accordion-body">Strategy days work better when people are actually present with each other. A session at the start or end shifts the energy in the room and gets people out of their heads and into the conversation.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>L&amp;D teams</strong> looking for something different to open or close a program</button>
+          <div class="accordion-body">If you're building a learning program and want something that lands differently - that sets the tone or sends people away energised - an interactive session does that in a way a panel or presentation rarely does.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Startup ecosystems and accelerators</strong> like CSIRO ON and Disruptors Co</button>
+          <div class="accordion-body">Founders and early-stage teams move fast and often skip the human infrastructure. A session that builds communication, collaboration, and creative thinking pays off fast in a high-stakes environment.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>HR teams</strong> building culture and engagement programs</button>
+          <div class="accordion-body">If you're trying to shift culture and you need something that doesn't feel like another mandatory training session, this lands differently. People leave with something they can actually use.</div>
+        </div>
       </div>
+
+      <style>
+        .accordion { border-top: 1px solid rgba(0,0,0,0.1); }
+        .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .accordion-trigger {
+          width: 100%; text-align: left; background: none; border: none;
+          padding: 1.25rem 2.5rem 1.25rem 0; cursor: pointer;
+          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400;
+          color: var(--text); position: relative; line-height: 1.4;
+          transition: color 0.2s;
+        }
+        .accordion-trigger:hover { color: var(--accent); }
+        .accordion-trigger::after {
+          content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+          font-size: 1.5rem; font-weight: 400; color: var(--accent);
+          transition: transform 0.25s;
+        }
+        .accordion-trigger.open::after { content: '+'; transform: translateY(-50%) rotate(45deg); }
+        .accordion-body {
+          font-size: 0.95rem; line-height: 1.8; color: #555;
+          max-height: 0; overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          padding: 0 2.5rem 0 0;
+        }
+        .accordion-body.open { max-height: 200px; padding-bottom: 1.25rem; }
+      </style>
+
+      <script>
+        document.querySelectorAll('.accordion-trigger').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const body = btn.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+            document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+            document.querySelectorAll('.accordion-trigger').forEach(b => b.classList.remove('open'));
+            if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+          });
+        });
+      </script>
     </div>
   </section>
 

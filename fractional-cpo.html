@@ -172,13 +172,67 @@
       <span class="section-label">Is this for you?</span>
       <h2 class="section-headline">Who this is for.</h2>
       <p class="section-body">You don't need to have everything figured out. You just need to know something isn't working.</p>
-      <div class="for-list" style="margin-top: 2rem;">
-        <div class="for-item">Organisations going through transition or rapid growth</div>
-        <div class="for-item">Leadership teams that want to model the culture, not just talk about it</div>
-        <div class="for-item">Companies navigating AI change and the human cost of it</div>
-        <div class="for-item">HR and L&D teams who've tried workshops and want something that sticks</div>
-        <div class="for-item">CEOs who know culture is the problem but don't know where to start</div>
+
+      <div class="accordion" style="margin-top: 2rem;">
+        <div class="accordion-item">
+          <button class="accordion-trigger">Organisations going through transition or rapid growth</button>
+          <div class="accordion-body">When headcount changes, roles shift, or strategy pivots, the human side of change is always the last thing to get attention. That's where things break. A CPO gives that side of the business the focus it actually needs.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Leadership teams that want to model the culture, not just talk about it</button>
+          <div class="accordion-body">Culture doesn't come from values on a wall. It comes from how leaders behave in the room. This work helps leadership teams actually embody the skills they want their people to have - not just endorse them.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">Companies navigating AI change and the human cost of it</button>
+          <div class="accordion-body">AI is changing what work looks like faster than most teams can adapt. The anxiety is real. The question isn't whether to use AI - it's how to keep humans genuinely in the loop, valued, and clear on what they bring that technology can't.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">HR and L&amp;D teams who've tried workshops and want something that sticks</button>
+          <div class="accordion-body">One workshop doesn't change a culture. You know that. This is about building the ongoing conditions where learning and behaviour change can actually take hold - not another good day out that fades by Friday.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger">CEOs who know culture is the problem but don't know where to start</button>
+          <div class="accordion-body">You can feel it but you can't quite name it. Turnover's up, energy's flat, people are polite but not real with each other. That's actually the perfect place to start. We figure it out together.</div>
+        </div>
       </div>
+
+      <style>
+        .accordion { border-top: 1px solid rgba(0,0,0,0.1); }
+        .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .accordion-trigger {
+          width: 100%; text-align: left; background: none; border: none;
+          padding: 1.25rem 2.5rem 1.25rem 0; cursor: pointer;
+          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700;
+          color: var(--text); position: relative; line-height: 1.4;
+          transition: color 0.2s;
+        }
+        .accordion-trigger:hover { color: var(--accent); }
+        .accordion-trigger::after {
+          content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+          font-size: 1.5rem; font-weight: 400; color: var(--accent);
+          transition: transform 0.25s;
+        }
+        .accordion-trigger.open::after { content: '+'; transform: translateY(-50%) rotate(45deg); }
+        .accordion-body {
+          font-size: 0.95rem; line-height: 1.8; color: #555;
+          max-height: 0; overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          padding: 0 2.5rem 0 0;
+        }
+        .accordion-body.open { max-height: 200px; padding-bottom: 1.25rem; }
+      </style>
+
+      <script>
+        document.querySelectorAll('.accordion-trigger').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const body = btn.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+            document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+            document.querySelectorAll('.accordion-trigger').forEach(b => b.classList.remove('open'));
+            if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+          });
+        });
+      </script>
     </div>
   </section>
 

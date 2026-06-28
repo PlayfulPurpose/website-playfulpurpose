@@ -7,56 +7,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --orange: #F7941D; --red: #E31E24; --lime: #8DC63F;
-      --blue: #1B3A8C; --white: #FFFFFF; --offwhite: #F9F6F2;
-      --text: #1a1a1a; --muted: #888;
-    }
+    :root { --orange: #F7941D; --red: #E31E24; --lime: #8DC63F; --blue: #1B3A8C; --white: #fff; --offwhite: #F9F6F2; --text: #1a1a1a; --muted: #888; }
     body { font-family: 'Poppins', sans-serif; background: var(--white); color: var(--text); }
     nav {
       position: sticky; top: 0; z-index: 100;
       background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0,0,0,0.07);
-      padding: 1.25rem 5vw;
-      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 5vw; display: flex; justify-content: space-between; align-items: center;
     }
     .nav-logo-img { height: 52px; width: auto; }
     .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover { color: var(--text); }
     .nav-cta { background: var(--orange) !important; color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-weight: 800 !important; font-size: 0.875rem !important; }
-    main { padding: 5rem 5vw; max-width: 1100px; margin: 0 auto; }
+    main { padding: 5rem 5vw; max-width: 1200px; margin: 0 auto; }
     .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; display: block; }
-    .page-headline { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .page-headline { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.75rem; }
     .page-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 600px; margin-bottom: 3rem; }
-    .hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
-    .hub-card {
-      border-radius: 16px; padding: 2rem;
-      border: 2px solid transparent;
+    .mentor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+    .mentor-card {
+      background: var(--offwhite); border-radius: 16px; overflow: hidden;
       text-decoration: none; color: var(--text);
-      display: flex; flex-direction: column; gap: 1rem;
       transition: transform 0.2s, box-shadow 0.2s;
-      background: var(--offwhite);
+      display: flex; flex-direction: column;
     }
-    .hub-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
-    .hub-card.orange { border-color: var(--orange); }
-    .hub-card.red { border-color: var(--red); }
-    .hub-card.lime { border-color: var(--lime); }
-    .hub-card.blue { border-color: var(--blue); }
-    .hub-card-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
-    .hub-card.orange .hub-card-tag { color: var(--orange); }
-    .hub-card.red .hub-card-tag { color: var(--red); }
-    .hub-card.lime .hub-card-tag { color: var(--lime); }
-    .hub-card.blue .hub-card-tag { color: var(--blue); }
-    .hub-card h3 { font-size: 1.4rem; font-weight: 900; letter-spacing: -0.02em; }
-    .hub-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.75; flex: 1; }
-    .hub-card-arrow { font-size: 1.2rem; color: var(--muted); align-self: flex-end; }
-    footer {
-      background: var(--blue); color: rgba(255,255,255,0.7);
-      padding: 2.5rem 5vw; text-align: center; font-size: 0.85rem;
-      margin-top: 5rem;
+    .mentor-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+    .mentor-img-wrap { position: relative; aspect-ratio: 1/1; overflow: hidden; background: #ddd; }
+    .mentor-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mentor-num {
+      position: absolute; top: 10px; left: 10px;
+      background: var(--orange); color: white;
+      font-size: 0.75rem; font-weight: 800;
+      padding: 3px 8px; border-radius: 100px;
     }
-    footer a { color: rgba(255,255,255,0.7); text-decoration: none; margin: 0 1rem; }
+    .mentor-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+    .mentor-name { font-weight: 800; font-size: 1rem; }
+    .mentor-hook { font-size: 0.85rem; color: #555; line-height: 1.6; flex: 1; }
+    .mentor-date { font-size: 0.75rem; color: var(--muted); margin-top: 0.25rem; }
+    footer { background: var(--blue); color: rgba(255,255,255,0.6); padding: 2.5rem 5vw; text-align: center; font-size: 0.85rem; margin-top: 5rem; }
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; margin: 0 1rem; }
     footer a:hover { color: white; }
     @media (max-width: 768px) { .nav-links { display: none; } }
   </style>
@@ -67,20 +56,594 @@
     <ul class="nav-links">
       <li><a href="index.html#what-i-do">What I Do</a></li>
       <li><a href="index.html#about">About</a></li>
-      <li><a href="thoughts.html" class="active">Thoughts</a></li>
+      <li><a href="thoughts.html">Thoughts</a></li>
       <li><a href="index.html#work-with-me" class="nav-cta">Work With Me</a></li>
     </ul>
   </nav>
   <main>
     <span class="page-label">Writing</span>
     <h1 class="page-headline">Mentor Love.</h1>
-    <p class="page-intro">54 posts celebrating the people who shaped my career. Because the humans behind the journey deserve to be seen.</p>
-    <p style="font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 600px; margin-top: -1.5rem;">Coming soon - 54 posts celebrating the people who shaped my career.</p>
+    <p class="page-intro">52 posts celebrating the people who shaped my career. Because the humans behind the journey deserve to be seen.</p>
+    <div class="mentor-grid">
+      
+  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7136158683037671424/" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-01.jpg" alt="Annie Parker" loading="lazy" />
+      <div class="mentor-num">#1</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Annie Parker</p>
+      <p class="mentor-hook">Amidst the twists of the mentor ‘conversation’, I found inspiration to commit to a weekly series, shedding light on thos...</p>
+      <p class="mentor-date">1 December 2023</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7138294457229008896/" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-02.jpg" alt="Megan Flamer" loading="lazy" />
+      <div class="mentor-num">#2</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Megan Flamer</p>
+      <p class="mentor-hook">Week two of my Series, and this one's all about celebrating Megan Flamer—the extraordinary force of brilliance, equitabl...</p>
+      <p class="mentor-date">7 December 2023</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorlove-doglovers-activity-7140880314238668800-P5ws" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-03.png" alt="Sybil Williams" loading="lazy" />
+      <div class="mentor-num">#3</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Sybil Williams</p>
+      <p class="mentor-hook">For the third mentor in series, I'm excited to shine the spotlight on another extraordinary mentor and friend, Sybil Wil...</p>
+      <p class="mentor-date">14 December 2023</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-kindness-resilience-activity-7143366963493281792-wZ8t" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-04.png" alt="Lotte Weiss" loading="lazy" />
+      <div class="mentor-num">#4</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Lotte Weiss</p>
+      <p class="mentor-hook">Often, the most impactful mentors and role models are those who don't realise they're serving in such a vital role.</p>
+      <p class="mentor-date">21 December 2023</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7148875766003380226/" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-05.png" alt="Julie Demsey" loading="lazy" />
+      <div class="mentor-num">#5</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Julie Demsey</p>
+      <p class="mentor-hook">Today's Post is for fellow mentor and friend, another American Julie, living here in Sydney. Celebrating Julie Demsey 🎉 ...</p>
+      <p class="mentor-date">5 January 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorlove-funatwork-activity-7151053617490182144-BRLD" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-06.png" alt="Andrew Everingham" loading="lazy" />
+      <div class="mentor-num">#6</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Andrew Everingham</p>
+      <p class="mentor-hook">Behind every transformative journey, there's a mentor like Andrew Everingham, who blends heart and creativity to redefin...</p>
+      <p class="mentor-date">11 January 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-firstnations-digitalinclusion-activity-7153210330427392001-wY40" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-07.png" alt="Mikaela Jade" loading="lazy" />
+      <div class="mentor-num">#7</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Mikaela Jade</p>
+      <p class="mentor-hook">Breaking barriers & blending worlds: Mikaela Jade FTSE's mentorship & leadership redefined my understanding of leadershi...</p>
+      <p class="mentor-date">17 January 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-improv-playfullearning-activity-7155415896528666624-sFlL" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-08.jpg" alt="Rebecca Stockley" loading="lazy" />
+      <div class="mentor-num">#8</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Rebecca Stockley</p>
+      <p class="mentor-hook">In 1998, at Camp Apple, a diverse group of creative minds - teachers, technophiles and yes, even kite-flying nuns - gath...</p>
+      <p class="mentor-date">23 January 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_taylorswift-mentorlove-withus-activity-7158572166878228481-WnKe?utm_source=share&utm_medium=member_desktop" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-09.jpg" alt="Kaz Brecher" loading="lazy" />
+      <div class="mentor-num">#9</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Kaz Brecher</p>
+      <p class="mentor-hook">Ever imagined rewriting a song, donning a wig and a boa, and performing in front of your class? Thanks to Kaz Brecher, a...</p>
+      <p class="mentor-date">31 January 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-leadership-activity-7160831967381381121-fhtQ?utm_source=share&utm_medium=member_desktop" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-10.jpg" alt="Shira Levine" loading="lazy" />
+      <div class="mentor-num">#10</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Shira Levine</p>
+      <p class="mentor-hook">🎼'If you get confused, listen to the music play.' 🎶 That's the Grateful Dead, folks, but it's also Shira Levine for you.</p>
+      <p class="mentor-date">7 February 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_aboriginal-engagement-consultants-nganya-activity-7163365464201515009-ehhl?utm_source=share&utm_medium=member_desktop" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-11.jpg" alt="Dixie Crawford" loading="lazy" />
+      <div class="mentor-num">#11</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Dixie Crawford</p>
+      <p class="mentor-hook">Ever met someone whose resilience not only challenges the status quo but reshapes it? Meet Dixie Crawford, a Barkindji w...</p>
+      <p class="mentor-date">14 February 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-lifeisbetterinaboa-friendship-activity-7165928597571010560-AnAs?utm_source=share&utm_medium=member_desktop" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-12.png" alt="Marcy Scott Lynn" loading="lazy" />
+      <div class="mentor-num">#12</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Marcy Scott Lynn</p>
+      <p class="mentor-hook">Organising hip-hop birthdays, debating the merits of boas and gefilte fish at Passover, and deep-diving into democracy h...</p>
+      <p class="mentor-date">21 February 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-improv-innovationineducation-activity-7168817752713986048-t0wn" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-13.jpg" alt="Marco Torres" loading="lazy" />
+      <div class="mentor-num">#13</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Marco Torres</p>
+      <p class="mentor-hook">Before there were tech gurus and gadget geeks, there was Marco Torres—turning the 'impossible' into 'I'm possible' in cl...</p>
+      <p class="mentor-date">28 February 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorship-leadership-activity-7171772807041732608-WNVC" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-14.jpg" alt="Danielle Seymour" loading="lazy" />
+      <div class="mentor-num">#14</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Danielle Seymour</p>
+      <p class="mentor-hook">One hand on the stroller, the other steering an event of 500 attendees that involved even more moving parts. Who says yo...</p>
+      <p class="mentor-date">8 March 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-humanapi-connector-activity-7173868421330137088-qzWP" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-15.jpg" alt="Susan McPherson" loading="lazy" />
+      <div class="mentor-num">#15</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Susan McPherson</p>
+      <p class="mentor-hook">Who says fan clubs are just for celebrities? After meeting Susan McPherson well over a decade ago, I was inspired to cre...</p>
+      <p class="mentor-date">14 March 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorlove-startups-activity-7175659958405902336-phs7" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-16.jpg" alt="Oonagh MacEldowny" loading="lazy" />
+      <div class="mentor-num">#16</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Oonagh MacEldowny</p>
+      <p class="mentor-hook">Before ChatGPT 🤖 entered the scene, I discovered my own Human Legal AI: an Irish legal genius who made legalese understa...</p>
+      <p class="mentor-date">21 March 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorship-personaldevelopment-activity-7178207824504664064-vpAO" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-17.jpg" alt="Tracy Wang" loading="lazy" />
+      <div class="mentor-num">#17</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Tracy Wang</p>
+      <p class="mentor-hook">Who would have guessed that leading BizAcademy 18 years ago would open my eyes to unexpected lessons? Spoiler alert: my ...</p>
+      <p class="mentor-date">26 March 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-trust-radicalgenerosity-activity-7181087069157404672-k9j4" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-18.jpg" alt="Mary-Anne Anderson" loading="lazy" />
+      <div class="mentor-num">#18</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Mary-Anne Anderson</p>
+      <p class="mentor-hook">As I write my 18th tribute, I celebrate the concept of 'Chai'—the Hebrew word for life— AND the life-enriching support M...</p>
+      <p class="mentor-date">3 April 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorship-womeninleadership-activity-7184034705468481537-wPlL" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-19.jpg" alt="Monica Bradley" loading="lazy" />
+      <div class="mentor-num">#19</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Monica Bradley</p>
+      <p class="mentor-hook">When an unstoppable force meets groundbreaking financial solutions for women, you get the story of Monica Bradley, featu...</p>
+      <p class="mentor-date">10 April 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-educatinggirls-play-activity-7186936432161165313-3VPU" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-20.png" alt="Kennedy Odede" loading="lazy" />
+      <div class="mentor-num">#20</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Kennedy Odede</p>
+      <p class="mentor-hook">Imagine your friend redefining leadership, transforming his slum in Kenya AND being named one of the Time 100 influencer...</p>
+      <p class="mentor-date">19 April 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-play-ai-activity-7189512926045573120-l39H" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-21.png" alt="Maxine Sherrin" loading="lazy" />
+      <div class="mentor-num">#21</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Maxine Sherrin</p>
+      <p class="mentor-hook">Imagine a startup world where RELATIONSHIPS trump transactions. Maxine Sherrin doesn’t just imagine it; she’s constantly...</p>
+      <p class="mentor-date">26 April 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_whose-ceo-are-you-anyway-activity-7191567182181339137-BLCk" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-22.png" alt="Gary Ware" loading="lazy" />
+      <div class="mentor-num">#22</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Gary Ware</p>
+      <p class="mentor-hook">Some people light 💡 up a room, some inspire ⚡ a crowd , and then there's Gary Ware, who does both while teaching you to ...</p>
+      <p class="mentor-date">2 May 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-play-mentordog-activity-7194608084630056960-bdFj" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-23.jpg" alt="HerShee" loading="lazy" />
+      <div class="mentor-num">#23</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">HerShee</p>
+      <p class="mentor-hook">Who says mentors must walk on two legs? My four-legged mentor, Hershee, teaches me about life’s greatest lessons, from t...</p>
+      <p class="mentor-date">10 May 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/feed/update/urn:li:activity:7197075519933210624/" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-24.jpg" alt="Vicki Ehrens" loading="lazy" />
+      <div class="mentor-num">#24</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Vicki Ehrens</p>
+      <p class="mentor-hook">How many of you can say your second-grade teacher inspired your entire career? I can, thanks to Ms. Ehrens. episode 24</p>
+      <p class="mentor-date">17 May 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-leadership-inspiration-activity-7199669641999245312-XqPq" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-25.jpg" alt="Nicole Wyne" loading="lazy" />
+      <div class="mentor-num">#25</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Nicole Wyne</p>
+      <p class="mentor-hook">Ever found found yourself sandboarding in Brazil with a marketing wizard?</p>
+      <p class="mentor-date">24 May 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-radicallygrateful-mentor-activity-7201808869621194753-5eYz" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-26.jpg" alt="Holly Ransom" loading="lazy" />
+      <div class="mentor-num">#26</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Holly Ransom</p>
+      <p class="mentor-hook">From a chance meeting at a gala in 2017 to a lasting mentorship and friendship, Holly Ransom has been a playful upliftin...</p>
+      <p class="mentor-date">30 May 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-activity-7203624951726133248-FULg" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-27.jpg" alt="Elliott Moore" loading="lazy" />
+      <div class="mentor-num">#27</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Elliott Moore</p>
+      <p class="mentor-hook">What happens when passion, creativity, and resilience converge? You get Elliot Moore</p>
+      <p class="mentor-date">4 June 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-toughteachings-leadership-activity-7207269197624532992-gbRs" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-28.png" alt="ANTIMENTOR 1" loading="lazy" />
+      <div class="mentor-num">#28</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">ANTIMENTOR 1</p>
+      <p class="mentor-hook">Reflecting on my encounters with toxic mentors, this post is titled “How Bad Leadership Taught Me What True Mentorship S...</p>
+      <p class="mentor-date">14 June 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-sustainability-circulareconomy-activity-7209012327382204416-q49F" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-29.jpg" alt="Yas Grigaliunas" loading="lazy" />
+      <div class="mentor-num">#29</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Yas Grigaliunas</p>
+      <p class="mentor-hook">In 2017, in a room full of startup founders at River City Labs, Yas Grigaliunas's authenticity and passion immediately s...</p>
+      <p class="mentor-date">19 June 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-ai-curiosity-activity-7212278724791001089-85yZ" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-30.jpg" alt="Lee Schofield" loading="lazy" />
+      <div class="mentor-num">#30</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Lee Schofield</p>
+      <p class="mentor-hook">When improv meets tech, magic happens. Here’s how Lee and I inspired each other through our respective love of the AIs!</p>
+      <p class="mentor-date">28 June 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-antiabrmentors-leadership-activity-7214861023877455872-reBv" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-31.png" alt="ANTIMENTOR 2" loading="lazy" />
+      <div class="mentor-num">#31</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">ANTIMENTOR 2</p>
+      <p class="mentor-hook">My Lessons Learned from Managing Challenging Behaviours of Direct Reports</p>
+      <p class="mentor-date">5 July 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-holdabrspace-askabrinsightfulabrquestions-activity-7217368673202708480-gvlf" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-32.jpg" alt="Kylie Jones" loading="lazy" />
+      <div class="mentor-num">#32</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Kylie Jones</p>
+      <p class="mentor-hook">When curiosity and compassion collide, you get a mentor like Kylie Jones.</p>
+      <p class="mentor-date">12 July 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-meticulousabrcommunityabrbuilding-activity-7219934743537016832-POY0" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-33.png" alt="Audrey Jean-Baptiste" loading="lazy" />
+      <div class="mentor-num">#33</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Audrey Jean-Baptiste</p>
+      <p class="mentor-hook">Younger yet wiser: An "informal" mentor (and colleague) reshaped my leadership style.</p>
+      <p class="mentor-date">19 July 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-findabrcleverabrwaysabrtoabrsucceed-activity-7222984552124727297-2vyD" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-34.jpg" alt="Gail Trell" loading="lazy" />
+      <div class="mentor-num">#34</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Gail Trell</p>
+      <p class="mentor-hook">Not getting into the 'gifted' program taught me one of the greatest lessons, thanks to mom.</p>
+      <p class="mentor-date">27 July 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-beabrauthenticabrandabrvulnerable-activity-7228345166317690880-JuXq" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-35.jpg" alt="Heidi Isern" loading="lazy" />
+      <div class="mentor-num">#35</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Heidi Isern</p>
+      <p class="mentor-hook">🌟 **Celebrating Heidi: A True Chameleon and Storyteller** 🌟</p>
+      <p class="mentor-date">11 August 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-powerabrofabrcommunity-balancedabrleadership-activity-7231091099442761728--_fB" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-36.png" alt="Moira Were" loading="lazy" />
+      <div class="mentor-num">#36</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Moira Were</p>
+      <p class="mentor-hook">Improv as a leadership and community building tool? Moira Were AM is living proof that it works and my feature of episod...</p>
+      <p class="mentor-date">19 August 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-supportiveabrgenerosity-prioritiseabrpersonalabrconnection-activity-7235106815292624896-9nfb" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-37.png" alt="Jamie Camidge" loading="lazy" />
+      <div class="mentor-num">#37</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Jamie Camidge</p>
+      <p class="mentor-hook">Jamie Camidge's personal touch—always opting for a call over a text—has shown me the power of genuine connection and why...</p>
+      <p class="mentor-date">30 August 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-wholeheartedabrleadership-creativityabrinabrconnection-activity-7237689285007564800-mJDF" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-38.jpg" alt="Poppy Rouse" loading="lazy" />
+      <div class="mentor-num">#38</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Poppy Rouse</p>
+      <p class="mentor-hook">Want to lower cortisol & spark creativity? Hug a lemur 🐒 ! Or, better yet, spend time brainstorming with someone like Po...</p>
+      <p class="mentor-date">6 September 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-tada-letabrgo-activity-7240222735371542530-pFS4" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-39.jpg" alt="Layne Beachley" loading="lazy" />
+      <div class="mentor-num">#39</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Layne Beachley</p>
+      <p class="mentor-hook">How do you know you’ve found a true mentor? When they not only inspire you to grow but join you for a hippie-style murde...</p>
+      <p class="mentor-date">13 September 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-trustabrinabrdelegation-collaborativeabrteamwork-activity-7245269712404635648-mvmG" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-40.png" alt="Tara Heathcoate" loading="lazy" />
+      <div class="mentor-num">#40</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Tara Heathcoate</p>
+      <p class="mentor-hook">After skipping last week, I’m doubling up—because if Jodie Passwell & Tara Heathcote taught me anything, it’s how powerf...</p>
+      <p class="mentor-date">27 September 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-trustabrinabrdelegation-collaborativeabrteamwork-activity-7245269712404635648-mvmG" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-41.png" alt="Jodie Passwell" loading="lazy" />
+      <div class="mentor-num">#41</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Jodie Passwell</p>
+      <p class="mentor-hook">After skipping last week, I’m doubling up—because if Jodie Passwell & Tara Heathcote taught me anything, it’s how powerf...</p>
+      <p class="mentor-date">27 September 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-speakabryourabrtruth-trueabrmentorship-activity-7247790398004191234-WztK" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-42.jpg" alt="Joanne Jacobs" loading="lazy" />
+      <div class="mentor-num">#42</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Joanne Jacobs</p>
+      <p class="mentor-hook">When your mentor believes in you more than you do yourself, that’s when real growth happens—thank you, Joanne Jacobs</p>
+      <p class="mentor-date">4 October 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-believe-embraceabryourabruniqueness-activity-7250304803539427328-1KN7/" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-43.jpg" alt="Vinisha Rathod" loading="lazy" />
+      <div class="mentor-num">#43</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Vinisha Rathod</p>
+      <p class="mentor-hook">It all started with a post on Slack seeking a flatmate for my second bedroom, and 💼🧚‍♂️ Vinisha Rathod responded as I wa...</p>
+      <p class="mentor-date">11 October 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-fearlessabradvocacy-resilientabrleadership-activity-7253968974500044800-6g53" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-44.jpg" alt="Hermione Way" loading="lazy" />
+      <div class="mentor-num">#44</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Hermione Way</p>
+      <p class="mentor-hook">In 2010, I found myself on one of the first The ICE Network trips for entrepreneurs in Croatia—complete with a pirate th...</p>
+      <p class="mentor-date">21 October 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorlove-humanapi-activity-7255054236453859328-lOat" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-45.jpg" alt="Ryan Pachasadram" loading="lazy" />
+      <div class="mentor-num">#45</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Ryan Pachasadram</p>
+      <p class="mentor-hook">Did you know there’s a bowling alley at the White House? Proud to say the former Deputy CTO of the USA is my next post e...</p>
+      <p class="mentor-date">24 October 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-playful-adaptability-activity-7257884564503552001-RfHg" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-46.jpg" alt="Emille Paille" loading="lazy" />
+      <div class="mentor-num">#46</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Emille Paille</p>
+      <p class="mentor-hook">In 1993, fresh out of university and stepping into a fast-paced master’s program at Georgia State University, I had the ...</p>
+      <p class="mentor-date">4 November 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-leadabrwithabrresilienceabrandabrjoy-activity-7260663358608023552-1wLO" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-47.jpg" alt="Kamala Harris" loading="lazy" />
+      <div class="mentor-num">#47</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Kamala Harris</p>
+      <p class="mentor-hook">Sometimes, hope means standing up, even when the outcome isn’t what you’d wished, campaigned, or voted for.</p>
+      <p class="mentor-date">11 November 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorlove-embraceabrimperfection-activity-7263628035566776321-wIXW" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-48.jpg" alt="Patricia Ryan Madson" loading="lazy" />
+      <div class="mentor-num">#48</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Patricia Ryan Madson</p>
+      <p class="mentor-hook">What if being 'average' was the secret to your success?</p>
+      <p class="mentor-date">18 November 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-takeabrinitiative-buildabrauthenticabrrelationships-activity-7266987367184363520-vwHQ" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-49.jpg" alt="Alllie Covarubius" loading="lazy" />
+      <div class="mentor-num">#49</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Alllie Covarubius</p>
+      <p class="mentor-hook">Sometimes the people who intimidate you the most end up being your greatest Allies [sic]. 😍</p>
+      <p class="mentor-date">26 November 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-empathy-equity-activity-7269825233623113731-0CyL" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-50.png" alt="Elaine Stead" loading="lazy" />
+      <div class="mentor-num">#50</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Elaine Stead</p>
+      <p class="mentor-hook">Sometimes, the most impactful mentors are the ones who don't just teach—they share space, listen deeply, and inspire wit...</p>
+      <p class="mentor-date">4 December 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-sayabryesabrand-leadabrbyabrstorytelling-activity-7271999574557253632-Lcb2" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-51.png" alt="Courtney Blackman" loading="lazy" />
+      <div class="mentor-num">#51</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Courtney Blackman</p>
+      <p class="mentor-hook">Storytelling, connections, and snacks—Courtney Blackman masters it all with grace.</p>
+      <p class="mentor-date">10 December 2024</p>
+    </div>
+  </a>
+  <a href="https://www.linkedin.com/posts/julietrell_mentorlove-mentorlove-lessonsabrareabreverywhere-activity-7274552154286120960-_Cfc" target="_blank" class="mentor-card fade-up">
+    <div class="mentor-img-wrap">
+      <img src="mentor-images/mentor-52.jpg" alt="Holly Ruxin" loading="lazy" />
+      <div class="mentor-num">#52</div>
+    </div>
+    <div class="mentor-body">
+      <p class="mentor-name">Holly Ruxin</p>
+      <p class="mentor-hook">52 weeks, 52 posts—this week, I’m celebrating Holly Ziegel Ruxin my woo-woo abundance advisor.</p>
+      <p class="mentor-date">17 December 2024</p>
+    </div>
+  </a>
+    </div>
   </main>
   <footer>
     <a href="index.html">Home</a>
+    <a href="writing.html">Writing</a>
     <a href="thoughts.html">Thoughts</a>
-    <a href="https://playfulpurpose.substack.com" target="_blank">Substack</a>
     <a href="index.html#contact">Get in touch</a>
     <p style="margin-top: 1.5rem; font-size: 0.75rem;">© Playful Purpose</p>
   </footer>

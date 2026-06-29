@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Logo scroll test</title>
+  <style>
+    body { font-family: sans-serif; background: #F9F6F2; padding: 4rem 0; }
+    p { text-align: center; font-size: 0.85rem; color: #888; margin-bottom: 2rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .marquee-wrap {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+    .marquee-wrap::before,
+    .marquee-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 80px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .marquee-wrap::before { left: 0; background: linear-gradient(to right, #F9F6F2, transparent); }
+    .marquee-wrap::after  { right: 0; background: linear-gradient(to left, #F9F6F2, transparent); }
+
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .marquee-track img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%);
+      opacity: 0.55;
+      transition: opacity 0.2s, filter 0.2s;
+    }
+    .marquee-track img:hover {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <p>Trusted by teams at</p>
+  <div class="marquee-wrap">
+    <div class="marquee-track" id="track"></div>
+  </div>
+
+  <script>
+    const logos = [
+      "ANZ-Logo.png",
+      "csiro.png",
+      "university of sydney.png",
+      "paramount.png",
+      "disruptors.png",
+      "indigital_logo.png",
+      "Insight_Enterprises_Logo.png",
+      "courage to care.png",
+      "parlaimentary library.png",
+      "atomic_tangerine_australia_logo.png",
+      "sparkfest.png",
+      "TRwlogo.png",
+      "i2n.png",
+    ];
+
+    const track = document.getElementById('track');
+    // Double the logos so the loop is seamless
+    [...logos, ...logos].forEach(name => {
+      const img = document.createElement('img');
+      img.src = `client-logos/${encodeURIComponent(name)}`;
+      img.alt = name.replace(/\.[^.]+$/, '');
+      track.appendChild(img);
+    });
+  </script>
+</body>
+</html>

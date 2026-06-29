@@ -26,6 +26,7 @@
 
     .marquee-track {
       display: flex;
+      align-items: center;
       gap: 4rem;
       width: max-content;
       animation: scroll 30s linear infinite;
@@ -37,15 +38,19 @@
       to   { transform: translateX(-50%); }
     }
 
-    .marquee-track img {
+    .marquee-track img,
+    .marquee-track svg {
       height: 40px;
       width: auto;
+      max-width: 160px;
       object-fit: contain;
       filter: grayscale(100%);
       opacity: 0.55;
       transition: opacity 0.2s, filter 0.2s;
+      flex-shrink: 0;
     }
-    .marquee-track img:hover {
+    .marquee-track img:hover,
+    .marquee-track svg:hover {
       filter: grayscale(0%);
       opacity: 1;
     }

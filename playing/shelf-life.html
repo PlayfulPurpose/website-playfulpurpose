@@ -277,7 +277,7 @@
 </footer>
 
 <script>
-  const AIRTABLE_TOKEN = 'patkkBc7bwCkU8YEY.f5a63bc700fac60a6820db59c7f3a731e18eb8b95752d95715f375c2f5a82154';
+  const AIRTABLE_TOKEN = 'patkkBc7bwCkU8YEY.256b9f0d0a23a5e0fede387a1715bba4710c1ec28f93ecedeeaabd40acd9d292';
   const BASE_ID = 'appzVvO2Fzv8ly8yZ';
 
   const COLOUR_MAP = {
@@ -303,7 +303,7 @@
 
   async function loadBooks() {
     try {
-      const url = `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula=AND({Approved}=TRUE())&sort[0][field]=Row&sort[0][direction]=asc`;
+      const url = `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula=NOT({Title}='')&sort[0][field]=Row&sort[0][direction]=asc`;
       const res = await fetch(url, { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } });
       const data = await res.json();
       allBooks = (data.records || []).map((r, i) => ({

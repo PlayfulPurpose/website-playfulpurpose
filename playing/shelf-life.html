@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Shelf Life - books by people Julie Trell knows and loves. A curated library of friends' books you can actually buy." />
-  <meta property="og:title" content="Shelf Life - Julie Trell, Playful Purpose" />
+  <meta name="description" content="Shelf Share - books by people Julie Trell knows and loves. A curated library of friends' books you can actually buy." />
+  <meta property="og:title" content="Shelf Share - Julie Trell, Playful Purpose" />
   <meta property="og:description" content="Books by people I know and love. Click a spine." />
   <meta property="og:image" content="https://playfulpurpose.github.io/website-playfulpurpose/og-image.png" />
-  <meta property="og:url" content="https://playfulpurpose.com/shelf-life.html" />
+  <meta property="og:url" content="https://playfulpurpose.com/shelf-share.html" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://playfulpurpose.github.io/website-playfulpurpose/og-image.png" />
-  <title>Shelf Life - Playful Purpose</title>
+  <title>Shelf Share - Playful Purpose</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -189,7 +189,7 @@
 
 <div class="page-header">
   <span class="page-label">The library</span>
-  <h1 class="page-headline">Shelf <span>Life</span></h1>
+  <h1 class="page-headline">Shelf <span>Share</span></h1>
   <p class="page-intro">Books by people I know and love. Not a sponsored list, not an algorithm. Just the stuff I'd hand you if you came to my house.</p>
 </div>
 
@@ -237,7 +237,7 @@
   async function loadBooks() {
     try {
       const res = await fetch(
-        `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula={Approved}=1&sort[0][field]=Row&sort[0][direction]=asc`,
+        `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula=AND({Approved}=TRUE())&sort[0][field]=Row&sort[0][direction]=asc`,
         { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
       );
       const data = await res.json();

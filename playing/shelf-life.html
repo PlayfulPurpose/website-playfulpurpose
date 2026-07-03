@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shelf Life - books by people Julie Trell knows and loves. A curated library of friends' books you can actually buy." />
+  <meta property="og:title" content="Shelf Life - Julie Trell, Playful Purpose" />
+  <meta property="og:description" content="Books by people I know and love. Click a spine." />
+  <meta property="og:image" content="https://playfulpurpose.github.io/website-playfulpurpose/og-image.png" />
+  <meta property="og:url" content="https://playfulpurpose.com/shelf-life.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://playfulpurpose.github.io/website-playfulpurpose/og-image.png" />
+  <title>Shelf Life - Playful Purpose</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange: #F7941D; --red: #E31E24; --lime: #8DC63F;
+      --blue: #1B3A8C; --white: #FFFFFF; --offwhite: #F9F6F2;
+      --text: #1a1a1a; --muted: #888;
+    }
+    body { font-family: 'Poppins', sans-serif; background: var(--white); color: var(--text); }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      padding: 1.25rem 5vw;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .nav-logo-img { height: 52px; width: auto; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-cta { background: var(--orange) !important; color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-weight: 800 !important; font-size: 0.875rem !important; }
+
+    /* PAGE HEADER */
+    .page-header { padding: 4rem 5vw 2rem; max-width: 1100px; margin: 0 auto; }
+    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; display: block; }
+    .page-headline { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .page-headline span { color: var(--orange); }
+    .page-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 600px; margin-bottom: 2rem; }
+
+    /* FILTERS */
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 5vw 2rem; max-width: 1100px; margin: 0 auto; }
+    .filter-btn {
+      font-size: 0.8rem; font-weight: 700; padding: 6px 16px;
+      border-radius: 100px; border: 2px solid var(--text);
+      background: var(--white); color: var(--text);
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      transition: all 0.15s;
+    }
+    .filter-btn.active, .filter-btn:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+
+    /* LIBRARY */
+    .library { padding: 0 5vw 4rem; max-width: 1100px; margin: 0 auto; }
+
+    /* SHELF */
+    .shelf-wrap { margin-bottom: 0; }
+    .books-row {
+      display: flex; align-items: flex-end; gap: 6px;
+      min-height: 170px; flex-wrap: wrap;
+    }
+
+    /* BOOK */
+    .book { display: flex; cursor: pointer; transition: transform 0.2s ease; flex-shrink: 0; }
+    .book:hover { transform: translateY(-14px); }
+    .book.open { transform: translateY(-20px); }
+    .book-spine {
+      border-radius: 3px 0 0 3px;
+      display: flex; align-items: center; justify-content: center;
+      border: 2.5px solid rgba(0,0,0,0.45); border-right: none;
+    }
+    .book-pages {
+      width: 11px;
+      background: #f0e8d8;
+      border: 2.5px solid rgba(0,0,0,0.35);
+      border-left: none;
+      border-radius: 0 3px 3px 0;
+    }
+    .spine-text {
+      writing-mode: vertical-rl; text-orientation: mixed;
+      transform: rotate(180deg);
+      font-size: 11px; font-weight: 900; color: #fff;
+      text-align: center; padding: 8px 4px; line-height: 1.15;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    }
+    .spine-author { font-size: 9px; font-weight: 400; opacity: 0.9; display: block; margin-top: 5px; }
+
+    /* SHELF PLANK */
+    .shelf-plank { display: block; width: 100%; margin-bottom: 16px; }
+
+    /* BOOK PANEL */
+    .book-panel {
+      display: none; border: 3px solid #111; border-radius: 12px;
+      padding: 24px; margin: 4px 0 20px; background: var(--white);
+      position: relative;
+    }
+    .book-panel.open { display: block; }
+    .panel-inner { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .panel-cover {
+      width: 100px; height: 145px; border-radius: 6px; flex-shrink: 0;
+      object-fit: cover; border: 2px solid rgba(0,0,0,0.15);
+    }
+    .panel-cover-placeholder {
+      width: 100px; height: 145px; border-radius: 6px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900; color: #fff; text-align: center;
+      padding: 8px; line-height: 1.3; border: 2px solid rgba(0,0,0,0.15);
+    }
+    .panel-info { flex: 1; min-width: 200px; }
+    .panel-title { font-size: 1.2rem; font-weight: 900; color: #111; margin-bottom: 2px; letter-spacing: -0.02em; }
+    .panel-author { font-size: 0.85rem; color: var(--orange); font-weight: 700; margin-bottom: 12px; }
+    .panel-summary { font-size: 0.85rem; color: #555; line-height: 1.65; margin-bottom: 12px; }
+    .panel-note-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #111; margin-bottom: 4px; }
+    .panel-note { font-size: 0.875rem; color: #333; line-height: 1.65; font-style: italic; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid var(--orange); }
+    .panel-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .panel-tag { font-size: 0.7rem; font-weight: 700; padding: 3px 12px; border-radius: 100px; background: var(--offwhite); color: #333; border: 1.5px solid #ddd; }
+    .buy-btn {
+      display: inline-block;
+      background: var(--orange); color: #fff;
+      border: 2.5px solid #111; padding: 10px 22px;
+      border-radius: 6px; font-size: 0.85rem; font-weight: 900;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      box-shadow: 4px 4px 0 #111; text-decoration: none;
+      transition: all 0.15s;
+    }
+    .buy-btn:hover { box-shadow: 2px 2px 0 #111; transform: translate(2px,2px); }
+    .panel-close {
+      position: absolute; top: 12px; right: 16px;
+      font-size: 1.5rem; font-weight: 900; cursor: pointer;
+      background: none; border: none; color: #111;
+      font-family: 'Poppins', sans-serif; line-height: 1;
+    }
+
+    /* COMMENTS */
+    .comments-section { border-top: 2px solid #eee; padding-top: 16px; }
+    .comments-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #111; margin-bottom: 12px; }
+    .comment-item { font-size: 0.85rem; color: #555; line-height: 1.6; margin-bottom: 8px; padding: 10px 14px; background: var(--offwhite); border-radius: 6px; border-left: 3px solid var(--orange); }
+    .comment-item strong { color: #111; }
+    .comment-form { margin-top: 14px; background: var(--offwhite); padding: 16px; border-radius: 8px; border: 2px solid #111; }
+    .comment-form-label { font-size: 0.75rem; font-weight: 800; color: #111; margin-bottom: 10px; }
+    .comment-form input, .comment-form textarea {
+      display: block; width: 100%; margin-bottom: 8px;
+      padding: 9px 12px; border: 2px solid #111; border-radius: 6px;
+      font-family: 'Poppins', sans-serif; font-size: 0.8rem; background: #fff; color: #111;
+    }
+    .comment-form textarea { height: 80px; resize: none; }
+    .comment-submit {
+      background: var(--blue); color: #fff;
+      border: 2.5px solid #111; padding: 10px 20px;
+      border-radius: 6px; font-size: 0.8rem; font-weight: 900;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      box-shadow: 3px 3px 0 #111; width: 100%; transition: all 0.15s;
+    }
+    .comment-submit:hover { box-shadow: 1px 1px 0 #111; transform: translate(2px,2px); }
+
+    /* LOADING / EMPTY STATES */
+    .loading { text-align: center; padding: 4rem; color: var(--muted); font-size: 1rem; }
+    .book.hidden { display: none; }
+
+    /* FOOTER */
+    footer {
+      background: var(--blue); color: rgba(255,255,255,0.7);
+      padding: 3rem 5vw; text-align: center; font-size: 0.85rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; margin: 0 1rem; }
+    footer a:hover { color: #fff; }
+    .footer-top { margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">
+    <img class="nav-logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Playful Purpose" id="nav-logo" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#what-i-do">What I Do</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="writing.html">Writing</a></li>
+    <li><a href="playing.html" class="active">Playing</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Work With Me</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <span class="page-label">The library</span>
+  <h1 class="page-headline">Shelf <span>Life</span></h1>
+  <p class="page-intro">Books by people I know and love. Not a sponsored list, not an algorithm. Just the stuff I'd hand you if you came to my house.</p>
+</div>
+
+<div class="filter-row" id="filter-row">
+  <button class="filter-btn active" data-tag="All">All</button>
+</div>
+
+<div class="library" id="library">
+  <div class="loading" id="loading">Loading the shelves...</div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <a href="https://playfulpurpose.substack.com" target="_blank">Substack</a>
+    <a href="https://linkedin.com/in/julietrell" target="_blank">LinkedIn</a>
+    <a href="mailto:julie@playfulpurpose.com">Email</a>
+  </div>
+  <div>Playful Purpose &copy; 2026 - Julie Trell</div>
+</footer>
+
+<script>
+  const AIRTABLE_TOKEN = 'REPLACE_WITH_AIRTABLE_TOKEN';
+  const BASE_ID = 'appzVvO2Fzv8ly8yZ';
+  const FORMSPREE_ID = 'mzdlaryg';
+
+  const COLOUR_MAP = {
+    'orange': '#F7941D', 'red': '#E31E24', 'green': '#8DC63F',
+    'lime': '#8DC63F', 'blue': '#1B3A8C', 'purple': '#9B59B6',
+    'yellow': '#FFD258', 'pink': '#E91E8C', 'teal': '#00897B',
+    'navy': '#1B3A8C', 'coral': '#E05A4E'
+  };
+
+  const BOOK_HEIGHTS = [130, 145, 120, 155, 135, 125, 148, 138, 128, 142];
+
+  let allBooks = [];
+  let activeTag = 'All';
+  let openBookId = null;
+
+  function getColour(val) {
+    if (!val) return '#8DC63F';
+    if (val.startsWith('#')) return val;
+    return COLOUR_MAP[val.toLowerCase()] || '#8DC63F';
+  }
+
+  async function loadBooks() {
+    try {
+      const res = await fetch(
+        `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula={Approved}=1&sort[0][field]=Row&sort[0][direction]=asc`,
+        { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
+      );
+      const data = await res.json();
+      allBooks = (data.records || []).map((r, i) => ({
+        id: r.id,
+        title: r.fields['Title'] || '',
+        author: r.fields['Author'] || '',
+        note: r.fields["Julie's Note"] || r.fields["Julie's note"] || '',
+        summary: r.fields['Summary'] || '',
+        spineColour: getColour(r.fields['Spine Colour'] || r.fields['Spine colour'] || ''),
+        tags: r.fields['Tags'] || [],
+        buyLink: r.fields['Buy Link'] || r.fields['Buy link'] || '#',
+        cover: r.fields['Cover Image'] ? r.fields['Cover Image'][0].url : null,
+        row: r.fields['Row'] || 1,
+        height: BOOK_HEIGHTS[i % BOOK_HEIGHTS.length],
+        width: 48 + (i % 3) * 6
+      }));
+      buildFilters();
+      renderShelves();
+    } catch(e) {
+      document.getElementById('loading').textContent = 'Couldn\'t load the shelves right now. Try refreshing.';
+    }
+  }
+
+  function buildFilters() {
+    const allTags = new Set();
+    allBooks.forEach(b => b.tags.forEach(t => allTags.add(t)));
+    const row = document.getElementById('filter-row');
+    allTags.forEach(tag => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn';
+      btn.dataset.tag = tag;
+      btn.textContent = tag;
+      btn.addEventListener('click', () => setFilter(tag));
+      row.appendChild(btn);
+    });
+    document.querySelector('[data-tag="All"]').addEventListener('click', () => setFilter('All'));
+  }
+
+  function setFilter(tag) {
+    activeTag = tag;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.tag === tag));
+    document.querySelectorAll('.book').forEach(el => {
+      const tags = el.dataset.tags ? el.dataset.tags.split(',') : [];
+      el.classList.toggle('hidden', tag !== 'All' && !tags.includes(tag));
+    });
+    closePanel();
+  }
+
+  function renderShelves() {
+    document.getElementById('loading').remove();
+    const library = document.getElementById('library');
+
+    const rows = {};
+    allBooks.forEach(b => {
+      if (!rows[b.row]) rows[b.row] = [];
+      rows[b.row].push(b);
+    });
+
+    Object.keys(rows).sort().forEach(rowNum => {
+      const books = rows[rowNum];
+
+      const rowEl = document.createElement('div');
+      rowEl.className = 'shelf-wrap';
+
+      const booksRow = document.createElement('div');
+      booksRow.className = 'books-row';
+      booksRow.id = 'books-row-' + rowNum;
+
+      books.forEach(book => {
+        const bookEl = document.createElement('div');
+        bookEl.className = 'book';
+        bookEl.id = 'book-' + book.id;
+        bookEl.dataset.tags = book.tags.join(',');
+        bookEl.innerHTML = `
+          <div class="book-spine" style="width:${book.width}px;height:${book.height}px;background:${book.spineColour};">
+            <div class="spine-text">${book.title}<span class="spine-author">${book.author.split(' ').slice(-1)[0]}</span></div>
+          </div>
+          <div class="book-pages" style="height:${book.height}px;"></div>
+        `;
+        bookEl.addEventListener('click', () => toggleBook(book, parseInt(rowNum)));
+        booksRow.appendChild(bookEl);
+      });
+
+      rowEl.appendChild(booksRow);
+
+      const plankSvg = `<svg class="shelf-plank" viewBox="0 0 900 16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,4 C120,2 240,8 400,4 C560,1 720,8 900,5 L900,13 C720,14 560,11 400,13 C240,15 120,11 0,12 Z" fill="#c8a96e" stroke="#111" stroke-width="2.5"/>
+        <path d="M0,4 C120,2 240,8 400,4 C560,1 720,8 900,5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+      </svg>`;
+      rowEl.insertAdjacentHTML('beforeend', plankSvg);
+
+      const panel = document.createElement('div');
+      panel.className = 'book-panel';
+      panel.id = 'panel-' + rowNum;
+      panel.innerHTML = `
+        <button class="panel-close" onclick="closePanel()">×</button>
+        <div class="panel-inner" id="panel-inner-${rowNum}"></div>
+        <div class="comments-section" id="comments-${rowNum}"></div>
+      `;
+      rowEl.appendChild(panel);
+
+      library.appendChild(rowEl);
+    });
+  }
+
+  function toggleBook(book, rowNum) {
+    if (openBookId === book.id) { closePanel(); return; }
+    closePanel();
+
+    openBookId = book.id;
+    document.getElementById('book-' + book.id).classList.add('open');
+
+    const coverHtml = book.cover
+      ? `<img class="panel-cover" src="${book.cover}" alt="${book.title}" />`
+      : `<div class="panel-cover-placeholder" style="background:${book.spineColour}">${book.title}</div>`;
+
+    const tagsHtml = book.tags.map(t => `<span class="panel-tag">${t}</span>`).join('');
+    const summaryHtml = book.summary ? `<p class="panel-summary">${book.summary}</p>` : '';
+    const noteHtml = book.note ? `<div class="panel-note-label">Julie's take</div><p class="panel-note">"${book.note}"</p>` : '';
+
+    document.getElementById('panel-inner-' + rowNum).innerHTML = `
+      ${coverHtml}
+      <div class="panel-info">
+        <div class="panel-title">${book.title}</div>
+        <div class="panel-author">${book.author}</div>
+        ${summaryHtml}
+        ${noteHtml}
+        <div class="panel-tags">${tagsHtml}</div>
+        <a class="buy-btn" href="${book.buyLink}" target="_blank" rel="noopener">Buy it on Booktopia ↗</a>
+      </div>
+    `;
+
+    document.getElementById('comments-' + rowNum).innerHTML = `
+      <div class="comments-label">What readers are saying</div>
+      <div class="comment-form">
+        <div class="comment-form-label">Leave a thought</div>
+        <form action="https://formspree.io/f/${FORMSPREE_ID}" method="POST">
+          <input type="hidden" name="book" value="${book.title}" />
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email (not shown publicly)" required />
+          <textarea name="comment" placeholder="What did you think of the book?" required></textarea>
+          <button type="submit" class="comment-submit">Submit ↗</button>
+        </form>
+      </div>
+    `;
+
+    document.getElementById('panel-' + rowNum).classList.add('open');
+    document.getElementById('panel-' + rowNum).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function closePanel() {
+    if (openBookId) {
+      document.getElementById('book-' + openBookId)?.classList.remove('open');
+      openBookId = null;
+    }
+    document.querySelectorAll('.book-panel').forEach(p => p.classList.remove('open'));
+  }
+
+  // Load logo from main site
+  fetch('index.html').then(r => r.text()).then(html => {
+    const match = html.match(/src="(data:image\/png;base64,[^"]+)"/);
+    if (match) document.getElementById('nav-logo').src = match[1];
+  }).catch(() => {});
+
+  loadBooks();
+</script>
+</body>
+</html>

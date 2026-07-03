@@ -7,7 +7,7 @@
   <meta property="og:title" content="Shelf Share - Julie Trell, Playful Purpose" />
   <meta property="og:description" content="Books by people I know and love. Click a spine." />
   <meta property="og:image" content="https://playfulpurpose.github.io/website-playfulpurpose/og-image.png" />
-  <meta property="og:url" content="https://playfulpurpose.com/shelf-share.html" />
+  <meta property="og:url" content="https://playfulpurpose.com/playing/shelf-life.html" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://playfulpurpose.github.io/website-playfulpurpose/og-image.png" />
@@ -18,13 +18,13 @@
     :root {
       --orange: #F7941D; --red: #E31E24; --lime: #8DC63F;
       --blue: #1B3A8C; --white: #FFFFFF; --offwhite: #F9F6F2;
-      --text: #1a1a1a; --muted: #888;
+      --text: #1a1a1a; --muted: #888; --wood: #b8864e;
     }
     body { font-family: 'Poppins', sans-serif; background: var(--white); color: var(--text); }
 
     /* NAV */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky; top: 0; z-index: 200;
       background: rgba(255,255,255,0.96); backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(0,0,0,0.07);
       padding: 1.25rem 5vw;
@@ -37,160 +37,195 @@
     .nav-cta { background: var(--orange) !important; color: var(--white) !important; padding: 0.5rem 1.25rem; border-radius: 100px; font-weight: 800 !important; font-size: 0.875rem !important; }
 
     /* PAGE HEADER */
-    .page-header { padding: 4rem 5vw 2rem; max-width: 1100px; margin: 0 auto; }
-    .page-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; display: block; }
-    .page-headline { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 1rem; }
+    .page-header {
+      padding: 3rem 5vw 0;
+      display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .header-left {}
+    .page-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; display: block; }
+    .page-headline { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1; }
     .page-headline span { color: var(--orange); }
-    .page-intro { font-size: 1.05rem; color: var(--muted); line-height: 1.75; max-width: 600px; margin-bottom: 2rem; }
+    .page-count { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
+    .header-right { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    .search-input {
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem;
+      padding: 8px 14px; border: 2px solid #ddd; border-radius: 100px;
+      width: 220px; color: var(--text); outline: none; transition: border 0.2s;
+    }
+    .search-input:focus { border-color: var(--orange); }
+    .sort-select {
+      font-family: 'Poppins', sans-serif; font-size: 0.85rem; font-weight: 700;
+      padding: 8px 14px; border: 2px solid #ddd; border-radius: 100px;
+      color: var(--text); background: var(--white); cursor: pointer; outline: none;
+    }
 
     /* FILTERS */
-    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 5vw 2rem; max-width: 1100px; margin: 0 auto; }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 8px; padding: 1.5rem 5vw 0; }
     .filter-btn {
-      font-size: 0.8rem; font-weight: 700; padding: 6px 16px;
-      border-radius: 100px; border: 2px solid var(--text);
-      background: var(--white); color: var(--text);
-      cursor: pointer; font-family: 'Poppins', sans-serif;
-      transition: all 0.15s;
+      font-size: 0.78rem; font-weight: 700; padding: 5px 14px;
+      border-radius: 100px; border: 2px solid #ccc;
+      background: var(--white); color: var(--muted);
+      cursor: pointer; font-family: 'Poppins', sans-serif; transition: all 0.15s;
     }
-    .filter-btn.active, .filter-btn:hover { background: var(--orange); border-color: var(--orange); color: var(--white); }
+    .filter-btn:hover { border-color: var(--orange); color: var(--orange); }
+    .filter-btn.active { background: var(--orange); border-color: var(--orange); color: var(--white); }
 
     /* LIBRARY */
-    .library { padding: 0 5vw 4rem; max-width: 1100px; margin: 0 auto; }
+    .library { padding: 2rem 5vw 5rem; }
 
     /* SHELF */
-    .shelf-wrap { margin-bottom: 0; }
-    .books-row {
-      display: flex; align-items: flex-end; gap: 6px;
-      min-height: 170px; flex-wrap: wrap;
-    }
+    .shelf-wrap { margin-bottom: 8px; }
+    .books-row { display: flex; align-items: flex-end; gap: 5px; min-height: 180px; flex-wrap: wrap; padding: 0 8px; }
 
     /* BOOK */
-    .book { display: flex; cursor: pointer; transition: transform 0.2s ease; flex-shrink: 0; }
-    .book:hover { transform: translateY(-14px); }
-    .book.open { transform: translateY(-20px); }
+    .book { display: flex; cursor: pointer; transition: transform 0.2s ease; flex-shrink: 0; position: relative; }
+    .book:hover { transform: translateY(-16px); }
+    .book.hidden { display: none; }
     .book-spine {
       border-radius: 3px 0 0 3px;
       display: flex; align-items: center; justify-content: center;
-      border: 2.5px solid rgba(0,0,0,0.45); border-right: none;
+      border: 2px solid rgba(0,0,0,0.4); border-right: none;
+      position: relative; overflow: hidden;
+    }
+    .book-spine::after {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: rgba(255,255,255,0.25);
     }
     .book-pages {
-      width: 11px;
-      background: #f0e8d8;
-      border: 2.5px solid rgba(0,0,0,0.35);
-      border-left: none;
+      width: 10px;
+      background: repeating-linear-gradient(to right, #f5ede0, #f5ede0 1px, #ede4d4 1px, #ede4d4 2px);
+      border: 2px solid rgba(0,0,0,0.3); border-left: none;
       border-radius: 0 3px 3px 0;
     }
     .spine-text {
       writing-mode: vertical-rl; text-orientation: mixed;
       transform: rotate(180deg);
-      font-size: 11px; font-weight: 900; color: #fff;
-      text-align: center; padding: 8px 4px; line-height: 1.15;
+      font-size: 11px; font-weight: 800; color: #fff;
+      text-align: center; padding: 10px 4px; line-height: 1.15;
       font-family: 'Poppins', sans-serif;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.35);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
-    .spine-author { font-size: 9px; font-weight: 400; opacity: 0.9; display: block; margin-top: 5px; }
+    .spine-author { font-size: 8.5px; font-weight: 500; opacity: 0.88; display: block; margin-top: 6px; }
 
     /* SHELF PLANK */
-    .shelf-plank { display: block; width: 100%; margin-bottom: 16px; }
+    .shelf-plank { display: block; width: 100%; }
 
-    /* BOOK PANEL */
-    .book-panel {
-      display: none; border: 3px solid #111; border-radius: 12px;
-      padding: 24px; margin: 4px 0 20px; background: var(--white);
-      position: relative;
+    /* EMPTY / NO RESULTS */
+    .no-results { padding: 3rem; text-align: center; color: var(--muted); font-size: 0.95rem; }
+    .end-of-shelf { text-align: center; color: #ccc; font-size: 0.8rem; letter-spacing: 0.1em; padding: 1.5rem 0 0; font-style: italic; }
+
+    /* MODAL OVERLAY */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 300;
+      background: rgba(0,0,0,0.45); align-items: center; justify-content: center; padding: 20px;
     }
-    .book-panel.open { display: block; }
-    .panel-inner { display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
-    .panel-cover {
-      width: 100px; height: 145px; border-radius: 6px; flex-shrink: 0;
-      object-fit: cover; border: 2px solid rgba(0,0,0,0.15);
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 14px;
+      border: 3px solid #111; box-shadow: 6px 6px 0 #111;
+      max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto;
+      position: relative; padding: 28px;
     }
-    .panel-cover-placeholder {
-      width: 100px; height: 145px; border-radius: 6px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900; color: #fff; text-align: center;
-      padding: 8px; line-height: 1.3; border: 2px solid rgba(0,0,0,0.15);
-    }
-    .panel-info { flex: 1; min-width: 200px; }
-    .panel-title { font-size: 1.2rem; font-weight: 900; color: #111; margin-bottom: 2px; letter-spacing: -0.02em; }
-    .panel-author { font-size: 0.85rem; color: var(--orange); font-weight: 700; margin-bottom: 12px; }
-    .panel-summary { font-size: 0.85rem; color: #555; line-height: 1.65; margin-bottom: 12px; }
-    .panel-note-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #111; margin-bottom: 4px; }
-    .panel-note { font-size: 0.875rem; color: #333; line-height: 1.65; font-style: italic; margin-bottom: 14px; padding-left: 12px; border-left: 3px solid var(--orange); }
-    .panel-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-    .panel-tag { font-size: 0.7rem; font-weight: 700; padding: 3px 12px; border-radius: 100px; background: var(--offwhite); color: #333; border: 1.5px solid #ddd; }
-    .buy-btn {
-      display: inline-block;
-      background: var(--orange); color: #fff;
-      border: 2.5px solid #111; padding: 10px 22px;
-      border-radius: 6px; font-size: 0.85rem; font-weight: 900;
-      cursor: pointer; font-family: 'Poppins', sans-serif;
-      box-shadow: 4px 4px 0 #111; text-decoration: none;
-      transition: all 0.15s;
-    }
-    .buy-btn:hover { box-shadow: 2px 2px 0 #111; transform: translate(2px,2px); }
-    .panel-close {
-      position: absolute; top: 12px; right: 16px;
-      font-size: 1.5rem; font-weight: 900; cursor: pointer;
+    .modal-close {
+      position: absolute; top: 14px; right: 18px;
+      font-size: 1.6rem; font-weight: 900; cursor: pointer;
       background: none; border: none; color: #111;
       font-family: 'Poppins', sans-serif; line-height: 1;
     }
+    .modal-close:hover { color: var(--orange); }
+    .modal-inner { display: flex; gap: 22px; }
+    .modal-cover {
+      width: 110px; height: 158px; border-radius: 6px; flex-shrink: 0;
+      object-fit: cover; border: 2px solid rgba(0,0,0,0.12);
+    }
+    .modal-cover-placeholder {
+      width: 110px; height: 158px; border-radius: 6px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900; color: #fff;
+      text-align: center; padding: 10px; line-height: 1.3;
+      border: 2px solid rgba(0,0,0,0.12);
+    }
+    .modal-info { flex: 1; min-width: 0; }
+    .modal-julie-tag { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--orange); margin-bottom: 6px; }
+    .modal-title { font-size: 1.35rem; font-weight: 900; color: #111; letter-spacing: -0.02em; margin-bottom: 3px; line-height: 1.2; }
+    .modal-author { font-size: 0.875rem; color: var(--muted); font-weight: 500; margin-bottom: 14px; }
+    .modal-summary { font-size: 0.85rem; color: #444; line-height: 1.7; margin-bottom: 12px; font-style: italic; }
+    .modal-note { font-size: 0.875rem; color: #333; line-height: 1.7; margin-bottom: 16px; padding-left: 12px; border-left: 3px solid var(--orange); }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .modal-tag { font-size: 0.7rem; font-weight: 700; padding: 3px 11px; border-radius: 100px; background: var(--offwhite); color: #555; border: 1.5px solid #e0e0e0; }
+    .modal-buy {
+      display: inline-block; background: var(--orange); color: #fff;
+      border: 2.5px solid #111; padding: 11px 24px;
+      border-radius: 8px; font-size: 0.875rem; font-weight: 900;
+      cursor: pointer; font-family: 'Poppins', sans-serif;
+      box-shadow: 4px 4px 0 #111; text-decoration: none; transition: all 0.15s;
+    }
+    .modal-buy:hover { box-shadow: 2px 2px 0 #111; transform: translate(2px, 2px); }
 
-    /* COMMENTS */
-    .comments-section { border-top: 2px solid #eee; padding-top: 16px; }
-    .comments-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #111; margin-bottom: 12px; }
-    .comment-item { font-size: 0.85rem; color: #555; line-height: 1.6; margin-bottom: 8px; padding: 10px 14px; background: var(--offwhite); border-radius: 6px; border-left: 3px solid var(--orange); }
-    .comment-item strong { color: #111; }
-    .comment-form { margin-top: 14px; background: var(--offwhite); padding: 16px; border-radius: 8px; border: 2px solid #111; }
-    .comment-form-label { font-size: 0.75rem; font-weight: 800; color: #111; margin-bottom: 10px; }
+    /* COMMENT SECTION */
+    .modal-comments { margin-top: 22px; border-top: 2px solid #f0f0f0; padding-top: 18px; }
+    .comments-title { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #111; margin-bottom: 12px; }
+    .comment-form { background: var(--offwhite); border-radius: 8px; padding: 14px; border: 2px solid #111; }
     .comment-form input, .comment-form textarea {
       display: block; width: 100%; margin-bottom: 8px;
-      padding: 9px 12px; border: 2px solid #111; border-radius: 6px;
-      font-family: 'Poppins', sans-serif; font-size: 0.8rem; background: #fff; color: #111;
+      padding: 8px 12px; border: 2px solid #ddd; border-radius: 6px;
+      font-family: 'Poppins', sans-serif; font-size: 0.8rem; color: var(--text);
+      background: #fff; transition: border 0.2s;
     }
-    .comment-form textarea { height: 80px; resize: none; }
+    .comment-form input:focus, .comment-form textarea:focus { outline: none; border-color: var(--orange); }
+    .comment-form textarea { height: 75px; resize: none; }
     .comment-submit {
+      display: block; width: 100%;
       background: var(--blue); color: #fff;
-      border: 2.5px solid #111; padding: 10px 20px;
-      border-radius: 6px; font-size: 0.8rem; font-weight: 900;
+      border: 2.5px solid #111; padding: 10px;
+      border-radius: 6px; font-size: 0.85rem; font-weight: 900;
       cursor: pointer; font-family: 'Poppins', sans-serif;
-      box-shadow: 3px 3px 0 #111; width: 100%; transition: all 0.15s;
+      box-shadow: 3px 3px 0 #111; transition: all 0.15s;
     }
-    .comment-submit:hover { box-shadow: 1px 1px 0 #111; transform: translate(2px,2px); }
-
-    /* LOADING / EMPTY STATES */
-    .loading { text-align: center; padding: 4rem; color: var(--muted); font-size: 1rem; }
-    .book.hidden { display: none; }
+    .comment-submit:hover { box-shadow: 1px 1px 0 #111; transform: translate(2px, 2px); }
 
     /* FOOTER */
-    footer {
-      background: var(--blue); color: rgba(255,255,255,0.7);
-      padding: 3rem 5vw; text-align: center; font-size: 0.85rem;
-    }
+    footer { background: var(--blue); color: rgba(255,255,255,0.7); padding: 3rem 5vw; text-align: center; font-size: 0.85rem; }
     footer a { color: rgba(255,255,255,0.7); text-decoration: none; margin: 0 1rem; }
     footer a:hover { color: #fff; }
-    .footer-top { margin-bottom: 1rem; }
+    .footer-links { margin-bottom: 1rem; }
+
+    @media (max-width: 600px) {
+      .page-header { flex-direction: column; align-items: flex-start; }
+      .modal-inner { flex-direction: column; }
+      .modal-cover, .modal-cover-placeholder { width: 100%; height: 200px; }
+    }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html">
-    <img class="nav-logo-img" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Playful Purpose" id="nav-logo" />
+  <a href="../index.html">
+    <img class="nav-logo-img" src="../og-image.png" alt="Playful Purpose" id="nav-logo" />
   </a>
   <ul class="nav-links">
-    <li><a href="index.html#what-i-do">What I Do</a></li>
-    <li><a href="index.html#about">About</a></li>
-    <li><a href="writing.html">Writing</a></li>
-    <li><a href="playing.html" class="active">Playing</a></li>
-    <li><a href="index.html#contact" class="nav-cta">Work With Me</a></li>
+    <li><a href="../index.html#what-i-do">What I Do</a></li>
+    <li><a href="../index.html#about">About</a></li>
+    <li><a href="../writing.html">Writing</a></li>
+    <li><a href="../playing.html" class="active">Playing</a></li>
+    <li><a href="../index.html#contact" class="nav-cta">Work With Me</a></li>
   </ul>
 </nav>
 
 <div class="page-header">
-  <span class="page-label">The library</span>
-  <h1 class="page-headline">Shelf <span>Share</span></h1>
-  <p class="page-intro">Books by people I know and love. Not a sponsored list, not an algorithm. Just the stuff I'd hand you if you came to my house.</p>
+  <div class="header-left">
+    <span class="page-label">The library</span>
+    <h1 class="page-headline">Shelf <span>Share</span></h1>
+    <p class="page-count" id="book-count">Books by people I know and love. Click a spine.</p>
+  </div>
+  <div class="header-right">
+    <input class="search-input" type="text" id="search" placeholder="Search title, author, blurb..." />
+    <select class="sort-select" id="sort-select">
+      <option value="recent">Recently added</option>
+      <option value="title">Title A-Z</option>
+      <option value="author">Author A-Z</option>
+    </select>
+  </div>
 </div>
 
 <div class="filter-row" id="filter-row">
@@ -198,11 +233,42 @@
 </div>
 
 <div class="library" id="library">
-  <div class="loading" id="loading">Loading the shelves...</div>
+  <p style="color:#aaa;padding:3rem 0;text-align:center;">Loading the shelves...</p>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-inner">
+      <div id="modal-cover-wrap"></div>
+      <div class="modal-info">
+        <div class="modal-julie-tag">Julie's pick</div>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-author" id="modal-author"></div>
+        <p class="modal-summary" id="modal-summary"></p>
+        <p class="modal-note" id="modal-note"></p>
+        <div class="modal-tags" id="modal-tags"></div>
+        <a class="modal-buy" id="modal-buy" href="#" target="_blank" rel="noopener">Buy it on Booktopia ↗</a>
+      </div>
+    </div>
+    <div class="modal-comments">
+      <div class="comments-title">Leave a thought</div>
+      <div class="comment-form">
+        <form id="comment-form" action="https://formspree.io/f/mzdlaryg" method="POST">
+          <input type="hidden" name="book" id="comment-book-field" value="" />
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email (not shown publicly)" required />
+          <textarea name="comment" placeholder="What did you think of the book?" required></textarea>
+          <button type="submit" class="comment-submit">Submit ↗</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <footer>
-  <div class="footer-top">
+  <div class="footer-links">
     <a href="https://playfulpurpose.substack.com" target="_blank">Substack</a>
     <a href="https://linkedin.com/in/julietrell" target="_blank">LinkedIn</a>
     <a href="mailto:julie@playfulpurpose.com">Email</a>
@@ -213,33 +279,32 @@
 <script>
   const AIRTABLE_TOKEN = 'patkkBc7bwCkU8YEY.f5a63bc700fac60a6820db59c7f3a731e18eb8b95752d95715f375c2f5a82154';
   const BASE_ID = 'appzVvO2Fzv8ly8yZ';
-  const FORMSPREE_ID = 'mzdlaryg';
 
   const COLOUR_MAP = {
-    'orange': '#F7941D', 'red': '#E31E24', 'green': '#8DC63F',
-    'lime': '#8DC63F', 'blue': '#1B3A8C', 'purple': '#9B59B6',
-    'yellow': '#FFD258', 'pink': '#E91E8C', 'teal': '#00897B',
-    'navy': '#1B3A8C', 'coral': '#E05A4E'
+    'orange': '#F7941D', 'red': '#E31E24', 'green': '#8DC63F', 'lime': '#8DC63F',
+    'blue': '#1B3A8C', 'purple': '#9B59B6', 'yellow': '#E6B800', 'pink': '#E91E8C',
+    'teal': '#00897B', 'navy': '#1B3A8C', 'coral': '#E05A4E', 'magenta': '#C2185B'
   };
 
-  const BOOK_HEIGHTS = [130, 145, 120, 155, 135, 125, 148, 138, 128, 142];
+  const HEIGHTS = [145, 160, 132, 168, 150, 138, 155, 142, 125, 162, 148, 135];
+  const WIDTHS  = [48, 54, 44, 58, 50, 46, 52, 56, 44, 54, 48, 50];
 
   let allBooks = [];
   let activeTag = 'All';
-  let openBookId = null;
+  let searchTerm = '';
+  let sortBy = 'recent';
 
-  function getColour(val) {
+  function colour(val) {
     if (!val) return '#8DC63F';
-    if (val.startsWith('#')) return val;
-    return COLOUR_MAP[val.toLowerCase()] || '#8DC63F';
+    const v = val.trim();
+    if (v.startsWith('#')) return v;
+    return COLOUR_MAP[v.toLowerCase()] || '#8DC63F';
   }
 
   async function loadBooks() {
     try {
-      const res = await fetch(
-        `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula=AND({Approved}=TRUE())&sort[0][field]=Row&sort[0][direction]=asc`,
-        { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
-      );
+      const url = `https://api.airtable.com/v0/${BASE_ID}/Books?filterByFormula=AND({Approved}=TRUE())&sort[0][field]=Row&sort[0][direction]=asc`;
+      const res = await fetch(url, { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } });
       const data = await res.json();
       allBooks = (data.records || []).map((r, i) => ({
         id: r.id,
@@ -247,158 +312,134 @@
         author: r.fields['Author'] || '',
         note: r.fields["Julie's Note"] || r.fields["Julie's note"] || '',
         summary: r.fields['Summary'] || '',
-        spineColour: getColour(r.fields['Spine Colour'] || r.fields['Spine colour'] || ''),
+        spineColour: colour(r.fields['Spine Colour'] || r.fields['Spine colour'] || ''),
         tags: r.fields['Tags'] || [],
         buyLink: r.fields['Buy Link'] || r.fields['Buy link'] || '#',
         cover: r.fields['Cover Image'] ? r.fields['Cover Image'][0].url : null,
         row: r.fields['Row'] || 1,
-        height: BOOK_HEIGHTS[i % BOOK_HEIGHTS.length],
-        width: 48 + (i % 3) * 6
+        createdTime: r.createdTime,
+        h: HEIGHTS[i % HEIGHTS.length],
+        w: WIDTHS[i % WIDTHS.length]
       }));
       buildFilters();
-      renderShelves();
+      render();
     } catch(e) {
-      document.getElementById('loading').textContent = 'Couldn\'t load the shelves right now. Try refreshing.';
+      document.getElementById('library').innerHTML = '<p class="no-results">Couldn\'t load the shelves right now. Try refreshing.</p>';
     }
   }
 
   function buildFilters() {
-    const allTags = new Set();
-    allBooks.forEach(b => b.tags.forEach(t => allTags.add(t)));
+    const tags = new Set();
+    allBooks.forEach(b => b.tags.forEach(t => tags.add(t)));
     const row = document.getElementById('filter-row');
-    allTags.forEach(tag => {
+    tags.forEach(tag => {
       const btn = document.createElement('button');
-      btn.className = 'filter-btn';
-      btn.dataset.tag = tag;
-      btn.textContent = tag;
-      btn.addEventListener('click', () => setFilter(tag));
+      btn.className = 'filter-btn'; btn.dataset.tag = tag; btn.textContent = tag;
+      btn.addEventListener('click', () => { activeTag = tag; updateFilters(); render(); });
       row.appendChild(btn);
     });
-    document.querySelector('[data-tag="All"]').addEventListener('click', () => setFilter('All'));
+    document.querySelector('[data-tag="All"]').addEventListener('click', () => { activeTag = 'All'; updateFilters(); render(); });
   }
 
-  function setFilter(tag) {
-    activeTag = tag;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.tag === tag));
-    document.querySelectorAll('.book').forEach(el => {
-      const tags = el.dataset.tags ? el.dataset.tags.split(',') : [];
-      el.classList.toggle('hidden', tag !== 'All' && !tags.includes(tag));
-    });
-    closePanel();
+  function updateFilters() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.tag === activeTag));
   }
 
-  function renderShelves() {
-    document.getElementById('loading').remove();
-    const library = document.getElementById('library');
-
-    const rows = {};
-    allBooks.forEach(b => {
-      if (!rows[b.row]) rows[b.row] = [];
-      rows[b.row].push(b);
-    });
-
-    Object.keys(rows).sort().forEach(rowNum => {
-      const books = rows[rowNum];
-
-      const rowEl = document.createElement('div');
-      rowEl.className = 'shelf-wrap';
-
-      const booksRow = document.createElement('div');
-      booksRow.className = 'books-row';
-      booksRow.id = 'books-row-' + rowNum;
-
-      books.forEach(book => {
-        const bookEl = document.createElement('div');
-        bookEl.className = 'book';
-        bookEl.id = 'book-' + book.id;
-        bookEl.dataset.tags = book.tags.join(',');
-        bookEl.innerHTML = `
-          <div class="book-spine" style="width:${book.width}px;height:${book.height}px;background:${book.spineColour};">
-            <div class="spine-text">${book.title}<span class="spine-author">${book.author.split(' ').slice(-1)[0]}</span></div>
-          </div>
-          <div class="book-pages" style="height:${book.height}px;"></div>
-        `;
-        bookEl.addEventListener('click', () => toggleBook(book, parseInt(rowNum)));
-        booksRow.appendChild(bookEl);
-      });
-
-      rowEl.appendChild(booksRow);
-
-      const plankSvg = `<svg class="shelf-plank" viewBox="0 0 900 16" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,4 C120,2 240,8 400,4 C560,1 720,8 900,5 L900,13 C720,14 560,11 400,13 C240,15 120,11 0,12 Z" fill="#c8a96e" stroke="#111" stroke-width="2.5"/>
-        <path d="M0,4 C120,2 240,8 400,4 C560,1 720,8 900,5" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
-      </svg>`;
-      rowEl.insertAdjacentHTML('beforeend', plankSvg);
-
-      const panel = document.createElement('div');
-      panel.className = 'book-panel';
-      panel.id = 'panel-' + rowNum;
-      panel.innerHTML = `
-        <button class="panel-close" onclick="closePanel()">×</button>
-        <div class="panel-inner" id="panel-inner-${rowNum}"></div>
-        <div class="comments-section" id="comments-${rowNum}"></div>
-      `;
-      rowEl.appendChild(panel);
-
-      library.appendChild(rowEl);
-    });
-  }
-
-  function toggleBook(book, rowNum) {
-    if (openBookId === book.id) { closePanel(); return; }
-    closePanel();
-
-    openBookId = book.id;
-    document.getElementById('book-' + book.id).classList.add('open');
-
-    const coverHtml = book.cover
-      ? `<img class="panel-cover" src="${book.cover}" alt="${book.title}" />`
-      : `<div class="panel-cover-placeholder" style="background:${book.spineColour}">${book.title}</div>`;
-
-    const tagsHtml = book.tags.map(t => `<span class="panel-tag">${t}</span>`).join('');
-    const summaryHtml = book.summary ? `<p class="panel-summary">${book.summary}</p>` : '';
-    const noteHtml = book.note ? `<div class="panel-note-label">Julie's take</div><p class="panel-note">"${book.note}"</p>` : '';
-
-    document.getElementById('panel-inner-' + rowNum).innerHTML = `
-      ${coverHtml}
-      <div class="panel-info">
-        <div class="panel-title">${book.title}</div>
-        <div class="panel-author">${book.author}</div>
-        ${summaryHtml}
-        ${noteHtml}
-        <div class="panel-tags">${tagsHtml}</div>
-        <a class="buy-btn" href="${book.buyLink}" target="_blank" rel="noopener">Buy it on Booktopia ↗</a>
-      </div>
-    `;
-
-    document.getElementById('comments-' + rowNum).innerHTML = `
-      <div class="comments-label">What readers are saying</div>
-      <div class="comment-form">
-        <div class="comment-form-label">Leave a thought</div>
-        <form action="https://formspree.io/f/${FORMSPREE_ID}" method="POST">
-          <input type="hidden" name="book" value="${book.title}" />
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Your email (not shown publicly)" required />
-          <textarea name="comment" placeholder="What did you think of the book?" required></textarea>
-          <button type="submit" class="comment-submit">Submit ↗</button>
-        </form>
-      </div>
-    `;
-
-    document.getElementById('panel-' + rowNum).classList.add('open');
-    document.getElementById('panel-' + rowNum).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  function closePanel() {
-    if (openBookId) {
-      document.getElementById('book-' + openBookId)?.classList.remove('open');
-      openBookId = null;
+  function filtered() {
+    let books = [...allBooks];
+    if (activeTag !== 'All') books = books.filter(b => b.tags.includes(activeTag));
+    if (searchTerm) {
+      const s = searchTerm.toLowerCase();
+      books = books.filter(b =>
+        b.title.toLowerCase().includes(s) ||
+        b.author.toLowerCase().includes(s) ||
+        b.summary.toLowerCase().includes(s) ||
+        b.note.toLowerCase().includes(s)
+      );
     }
-    document.querySelectorAll('.book-panel').forEach(p => p.classList.remove('open'));
+    if (sortBy === 'title') books.sort((a,b) => a.title.localeCompare(b.title));
+    else if (sortBy === 'author') books.sort((a,b) => a.author.localeCompare(b.author));
+    else books.sort((a,b) => new Date(b.createdTime) - new Date(a.createdTime));
+    return books;
   }
 
-  // Load logo from main site
-  fetch('index.html').then(r => r.text()).then(html => {
+  function render() {
+    const books = filtered();
+    const lib = document.getElementById('library');
+    document.getElementById('book-count').textContent = `${books.length} book${books.length !== 1 ? 's' : ''} by people I know and love`;
+
+    if (!books.length) {
+      lib.innerHTML = '<p class="no-results">No books match that search. Try something else.</p>';
+      return;
+    }
+
+    const SHELF_SIZE = 10;
+    const shelves = [];
+    for (let i = 0; i < books.length; i += SHELF_SIZE) shelves.push(books.slice(i, i + SHELF_SIZE));
+
+    lib.innerHTML = shelves.map((shelf, si) => `
+      <div class="shelf-wrap">
+        <div class="books-row">
+          ${shelf.map(b => `
+            <div class="book" id="book-${b.id}" data-id="${b.id}" onclick="openModal('${b.id}')">
+              <div class="book-spine" style="width:${b.w}px;height:${b.h}px;background:${b.spineColour};">
+                <div class="spine-text">${b.title}<span class="spine-author">${b.author.split(' ').slice(-1)[0]}</span></div>
+              </div>
+              <div class="book-pages" style="height:${b.h}px;"></div>
+            </div>
+          `).join('')}
+        </div>
+        <svg class="shelf-plank" viewBox="0 0 1000 20" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;">
+          <path d="M0,5 C150,3 300,9 500,5 C700,1 850,8 1000,5 L1000,16 C850,17 700,13 500,16 C300,18 150,14 0,16 Z" fill="#c8a96e" stroke="#111" stroke-width="2.5"/>
+          <path d="M0,5 C150,3 300,9 500,5 C700,1 850,8 1000,5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        </svg>
+      </div>
+    `).join('') + '<div class="end-of-shelf">- end of shelf -</div>';
+  }
+
+  function openModal(id) {
+    const b = allBooks.find(b => b.id === id);
+    if (!b) return;
+
+    document.getElementById('modal-cover-wrap').innerHTML = b.cover
+      ? `<img class="modal-cover" src="${b.cover}" alt="${b.title}" />`
+      : `<div class="modal-cover-placeholder" style="background:${b.spineColour}">${b.title}</div>`;
+
+    document.getElementById('modal-title').textContent = b.title;
+    document.getElementById('modal-author').textContent = 'by ' + b.author;
+    document.getElementById('modal-summary').textContent = b.summary || '';
+    document.getElementById('modal-summary').style.display = b.summary ? 'block' : 'none';
+    document.getElementById('modal-note').textContent = b.note ? '"' + b.note + '"' : '';
+    document.getElementById('modal-note').style.display = b.note ? 'block' : 'none';
+    document.getElementById('modal-tags').innerHTML = b.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
+    document.getElementById('modal-buy').href = b.buyLink || '#';
+    document.getElementById('comment-book-field').value = b.title;
+
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  document.getElementById('search').addEventListener('input', e => {
+    searchTerm = e.target.value; render();
+  });
+
+  document.getElementById('sort-select').addEventListener('change', e => {
+    sortBy = e.target.value; render();
+  });
+
+  // Load nav logo from parent index
+  fetch('../index.html').then(r => r.text()).then(html => {
     const match = html.match(/src="(data:image\/png;base64,[^"]+)"/);
     if (match) document.getElementById('nav-logo').src = match[1];
   }).catch(() => {});

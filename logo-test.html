@@ -26,10 +26,10 @@
 
     .marquee-track {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 4rem;
       width: max-content;
-      animation: scroll 30s linear infinite;
+      animation: scroll 40s linear infinite;
     }
     .marquee-track:hover { animation-play-state: paused; }
 
@@ -38,8 +38,16 @@
       to   { transform: translateX(-50%); }
     }
 
-    .marquee-track img,
-    .marquee-track svg {
+    .logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .logo-item img,
+    .logo-item svg {
       height: 40px;
       width: auto;
       max-width: 160px;
@@ -47,12 +55,21 @@
       filter: grayscale(100%);
       opacity: 0.55;
       transition: opacity 0.2s, filter 0.2s;
-      flex-shrink: 0;
     }
-    .marquee-track img:hover,
-    .marquee-track svg:hover {
+    .logo-item:hover img,
+    .logo-item:hover svg {
       filter: grayscale(0%);
       opacity: 1;
+    }
+    .logo-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #aaa;
+      text-align: center;
+      max-width: 120px;
     }
   </style>
 </head>
@@ -64,32 +81,44 @@
 
   <script>
     const logos = [
-      "ANZ-Logo.png",
-      "csiro.png",
-      "university-of-sydney.png",
-      "paramount.png",
-      "disruptors.png",
-      "indigital_logo.png",
-      "Insight_Enterprises_Logo.png",
-      "courage-to-care.png",
-      "parlaimentary-library.png",
-      "atomic_tangerine_australia_logo.png",
-      "TRwlogo.png",
-      "i2n.png",
-      "press-play-ventures--white.png",
-      "infoxchange.svg",
-      "forumspace.png",
-      "coralus.png",
-      "Ibvoght.svg",
+      { file: "ANZ-Logo.png",                          name: "ANZ" },
+      { file: "csiro.png",                              name: "CSIRO" },
+      { file: "university-of-sydney.png",               name: "University of Sydney" },
+      { file: "paramount.png",                          name: "Paramount" },
+      { file: "disruptors.png",                         name: "Disruptors Co" },
+      { file: "indigital_logo.png",                     name: "InDigital" },
+      { file: "Insight_Enterprises_Logo.png",           name: "Insight Enterprises" },
+      { file: "courage-to-care.png",                    name: "Courage to Care" },
+      { file: "parlaimentary-library.png",              name: "Parliamentary Library" },
+      { file: "atomic_tangerine_australia_logo.png",    name: "Atomic Tangerine" },
+      { file: "TRwlogo.png",                            name: "The Right Fit" },
+      { file: "i2n.png",                                name: "i2n" },
+      { file: "press-play-ventures--white.png",         name: "Press Play Ventures" },
+      { file: "infoxchange.svg",                        name: "Infoxchange" },
+      { file: "forumspace.png",                         name: "Forum Space" },
+      { file: "coralus.png",                            name: "Coralus" },
+      { file: "Ibvoght.svg",                            name: "Ibvoght" },
     ];
 
     const track = document.getElementById('track');
-    // Double the logos so the loop is seamless
-    [...logos, ...logos].forEach(name => {
+
+    function makeItem({ file, name }) {
+      const div = document.createElement('div');
+      div.className = 'logo-item';
       const img = document.createElement('img');
-      img.src = `client-logos/${encodeURIComponent(name)}`;
-      img.alt = name.replace(/\.[^.]+$/, '');
-      track.appendChild(img);
+      img.src = `client-logos/${encodeURIComponent(file)}`;
+      img.alt = name;
+      const label = document.createElement('span');
+      label.className = 'logo-name';
+      label.textContent = name;
+      div.appendChild(img);
+      div.appendChild(label);
+      return div;
+    }
+
+    // Double the logos so the loop is seamless
+    [...logos, ...logos].forEach(logo => {
+      track.appendChild(makeItem(logo));
     });
   </script>
 </body>

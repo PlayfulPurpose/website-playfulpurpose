@@ -195,13 +195,29 @@
     #home {
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 10rem 5vw 6rem;
+      align-items: center;
       position: relative;
       overflow: hidden;
-      background: var(--white);
+      background-image: url('swing-with-water.jpg');
+      background-size: cover;
+      background-position: center 30%;
+    }
+    #home::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.18);
+      pointer-events: none;
+    }
+    .hero-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255,255,255,0.96);
+      border-radius: 24px;
+      padding: 3rem 3.5rem;
+      max-width: 520px;
+      margin-left: clamp(2rem, 8vw, 8rem);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
     }
 
     .hero-eyebrow {
@@ -911,6 +927,15 @@
 
       .nav-hamburger { display: flex; }
 
+      .hero-card {
+        margin: 0 1.25rem;
+        padding: 2rem 1.75rem;
+        border-radius: 18px;
+        max-width: 100%;
+      }
+
+      #home { align-items: flex-end; padding-bottom: 3rem; background-position: 70% center; }
+
       .about-inner {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -954,14 +979,16 @@
 
   <!-- HERO -->
   <section id="home">
-    <p class="hero-eyebrow">Julie Trell - Chief Play Officer</p>
-    <h1 class="hero-headline">
-      The future<br>of work is<br><span class="spinning-word visible" id="spinner">play</span><span class="logo-dot">.</span>
-    </h1>
-    <p class="hero-sub">
-      I help people stay human in an AI world - building the connection, creativity, and relationships that technology can't replace.
-    </p>
-    <a href="https://calendly.com/playfulpurpose" target="_blank" class="btn-primary">Let's talk</a>
+    <div class="hero-card">
+      <p class="hero-eyebrow">Julie Trell - Chief Play Officer</p>
+      <h1 class="hero-headline">
+        The future<br>of work is<br><span class="spinning-word visible" id="spinner">play</span><span class="logo-dot">.</span>
+      </h1>
+      <p class="hero-sub">
+        I help people stay human in an AI world - building the connection, creativity, and relationships that technology can't replace.
+      </p>
+      <a href="https://calendly.com/playfulpurpose" target="_blank" class="btn-primary">Let's talk</a>
+    </div>
   </section>
 
   <!-- PROBLEM -->

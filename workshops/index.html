@@ -204,29 +204,39 @@
 
       <div class="events-grid">
 
-        <div class="event-card">
-          <h3>Kidsultants</h3>
-          <p>Kids don't know what's supposed to be hard. Bring a group of 7-15 year olds into your office as consultants. They'll look at your challenges with genuinely fresh eyes, ask the questions adults stopped asking years ago, and give you feedback nobody in your leadership team would dare to say.</p>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front"><h3>Kidsultants</h3><span class="flip-hint">tap to learn more</span></div>
+            <div class="flip-back"><p>Kids don't know what's supposed to be hard. Bring a group of 7-15 year olds into your office as consultants. They'll look at your challenges with genuinely fresh eyes, ask the questions adults stopped asking years ago, and give you feedback nobody in your leadership team would dare to say.</p></div>
+          </div>
         </div>
 
-        <div class="event-card">
-          <h3>Baby Shark Tank</h3>
-          <p>You've got a new product, a pitch, a campaign. Now explain it to a room full of 7-15 year olds. If they get it, you're onto something. If they don't, neither do your customers. Adults present, Baby Sharks give the feedback. Jargon-free zone.</p>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front"><h3>Baby Shark Tank</h3><span class="flip-hint">tap to learn more</span></div>
+            <div class="flip-back"><p>You've got a new product, a pitch, a campaign. Now explain it to a room full of 7-15 year olds. If they get it, you're onto something. If they don't, neither do your customers. Adults present, Baby Sharks give the feedback. Jargon-free zone.</p></div>
+          </div>
         </div>
 
-        <div class="event-card">
-          <h3>Who's [Your Company] Is It Anyway</h3>
-          <p>Based on the improv format of Whose Line Is It Anyway, this drops your team into unscripted scenarios from your world. No scripts. No PowerPoints. No safe answers. Fast, funny, and surprisingly revealing about how your people actually think and communicate.</p>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front"><h3>Who's [Your Company] Is It Anyway</h3><span class="flip-hint">tap to learn more</span></div>
+            <div class="flip-back"><p>Based on the improv format of Whose Line Is It Anyway, this drops your team into unscripted scenarios from your world. No scripts. No PowerPoints. No safe answers. Fast, funny, and surprisingly revealing about how your people actually think and communicate.</p></div>
+          </div>
         </div>
 
-        <div class="event-card">
-          <h3>After Work</h3>
-          <p>Bring parents and their kids into the office to play with the tech shaping the future: AI, making, building things. Hands-on, genuinely fun, and a way to show the next generation what work can look like when it's good.</p>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front"><h3>After Work</h3><span class="flip-hint">tap to learn more</span></div>
+            <div class="flip-back"><p>Bring parents and their kids into the office to play with the tech shaping the future: AI, making, building things. Hands-on, genuinely fun, and a way to show the next generation what work can look like when it's good.</p></div>
+          </div>
         </div>
 
-        <div class="event-card">
-          <h3>Brag & Tag</h3>
-          <p>Most teams are great at giving feedback. Not so great at celebrating. Brag & Tag fixes that. Each person shares a win - any win - and instead of polite applause, the group responds with something creative and genuine. Then they tag the next person. 45 minutes. No coaching. No critique. Just the surprisingly energising experience of being properly celebrated.</p>
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front"><h3>Brag & Tag</h3><span class="flip-hint">tap to learn more</span></div>
+            <div class="flip-back"><p>Most teams are great at giving feedback. Not so great at celebrating. Brag & Tag fixes that. Each person shares a win - any win - and instead of polite applause, the group responds with something creative and genuine. Then they tag the next person. 45 minutes. No coaching. No critique. Just the surprisingly energising experience of being properly celebrated.</p></div>
+          </div>
         </div>
 
       </div>
@@ -234,10 +244,16 @@
   </section>
 
   <style>
-    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-    .event-card { background: var(--offwhite); border-radius: 16px; padding: 2rem; border-left: 4px solid var(--orange); }
-    .event-card h3 { font-size: 1.1rem; font-weight: 900; margin-bottom: 0.75rem; color: var(--text); }
-    .event-card p { font-size: 0.95rem; line-height: 1.8; color: #555; }
+    .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+    .flip-card { height: 220px; perspective: 1000px; cursor: pointer; }
+    .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.5s ease; }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back { position: absolute; inset: 0; border-radius: 16px; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; }
+    .flip-front { background: white; border: 2px solid var(--orange); }
+    .flip-front h3 { font-size: 1.2rem; font-weight: 900; color: var(--text); margin: 0; line-height: 1.3; }
+    .flip-hint { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange); margin-top: 0.75rem; }
+    .flip-back { background: var(--orange); transform: rotateY(180deg); align-items: flex-start; text-align: left; justify-content: center; }
+    .flip-back p { font-size: 0.88rem; line-height: 1.7; color: white; margin: 0; }
   </style>
 
   <section style="background: #F9F6F2;">

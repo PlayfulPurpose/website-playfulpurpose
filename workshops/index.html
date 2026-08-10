@@ -190,7 +190,7 @@
         <div class="step">
           <div class="step-num">04</div>
           <h4>Follow through</h4>
-          <p>A debrief, takeaways people can actually use, and optionally a follow-up session to check what's sticking.</p>
+          <p>One session is a start, not a finish. Every workshop includes a follow-up check-in to see what's landed, what's shifted, and where people need a nudge. Think of it as an accountability buddy built into the process.</p>
         </div>
       </div>
     </div>
@@ -200,13 +200,73 @@
     <div class="section-inner">
       <span class="section-label">Right for you if</span>
       <h2 class="section-headline">Who books workshops.</h2>
-      <div class="for-list" style="margin-top: 2rem;">
-        <div class="for-item">Teams that need to work better together - and know it</div>
-        <div class="for-item">Organisations going through change who need people to adapt faster</div>
-        <div class="for-item">L&D teams building a culture program that actually lands</div>
-        <div class="for-item">Leadership teams that want to model the skills, not just teach them</div>
-        <div class="for-item">Startup accelerators and innovation programs (CSIRO, Workday)</div>
+
+      <div class="accordion" style="margin-top: 2rem;">
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Teams</strong> that need to work better together - and know it</button>
+          <div class="accordion-body">If the dysfunction is on the table and people are ready to do something about it, that's the best place to start. We build from where you are.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Organisations</strong> going through change who need people to adapt faster</button>
+          <div class="accordion-body">Change programs fail when the human side gets left behind. A workshop gives people tools to navigate uncertainty together, not just survive it.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>L&amp;D teams</strong> building a culture program that actually lands</button>
+          <div class="accordion-body">If you've run the workshops and watched the learning evaporate by Friday, this is different. Built around your specific context, with a follow-up check-in built in.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Leadership teams</strong> that want to model the skills, not just teach them</button>
+          <div class="accordion-body">Leaders set the tone. When leadership teams go through the same experience as their people, it sends a powerful signal that this stuff is real.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>Startup accelerators</strong> and innovation programs</button>
+          <div class="accordion-body">Fast-moving teams skip the human infrastructure and pay for it later. A workshop early in the program builds the communication and collaboration muscles that make everything else work better.</div>
+        </div>
       </div>
+
+      <style>
+        .accordion { border-top: 1px solid rgba(0,0,0,0.1); }
+        .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .accordion-trigger {
+          width: 100%; text-align: left; background: none; border: none;
+          padding: 1.25rem 2.5rem 1.25rem 3rem; cursor: pointer;
+          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400;
+          color: var(--text); position: relative; line-height: 1.4;
+          transition: color 0.2s;
+        }
+        .accordion-trigger:hover { color: var(--accent); }
+        .accordion-trigger::before {
+          content: '';
+          position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+          width: 20px; height: 20px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,8 C26,6 8,22 6,46 C4,68 18,88 42,94 C66,100 88,86 94,64 C100,42 88,18 66,10 C58,7 54,8 50,8 Z' fill='none' stroke='%238DC63F' stroke-width='7' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='4,1'/%3E%3C/svg%3E");
+          background-repeat: no-repeat; background-size: contain;
+        }
+        .accordion-trigger::after {
+          content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+          font-size: 1.5rem; font-weight: 400; color: var(--accent); transition: transform 0.25s;
+        }
+        .accordion-trigger.open::after { content: '+'; transform: translateY(-50%) rotate(45deg); }
+        .accordion-body {
+          font-size: 0.95rem; line-height: 1.8; color: #555;
+          max-height: 0; overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          padding: 0 2.5rem 0 0;
+        }
+        .accordion-body.open { max-height: 200px; padding-bottom: 1.25rem; }
+      </style>
+
+      <script>
+        document.querySelectorAll('.accordion-trigger').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const body = btn.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+            document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+            document.querySelectorAll('.accordion-trigger').forEach(b => b.classList.remove('open'));
+            if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+          });
+        });
+      </script>
     </div>
   </section>
 

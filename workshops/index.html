@@ -235,14 +235,14 @@
 
   <style>
     .events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
-    .flip-card { border-radius: 16px; border: 2px solid; cursor: pointer; }
-    .flip-front { padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 160px; }
+    .flip-card { border-radius: 16px; border: 2px solid; cursor: pointer; display: flex; flex-direction: column; }
+    .flip-front { flex: 1; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 160px; }
     .flip-front h3 { font-size: 1.15rem; font-weight: 900; color: var(--text); margin: 0; line-height: 1.3; }
     .flip-hint { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.75rem; }
-    .flip-back { display: none; padding: 2rem; border-radius: 14px; }
+    .flip-back { display: none; flex: 1; padding: 2rem; border-radius: 14px; }
     .flip-back p { font-size: 0.9rem; line-height: 1.75; color: white; margin: 0; }
     .flip-card.flipped .flip-front { display: none; }
-    .flip-card.flipped .flip-back { display: block; animation: flipReveal 0.35s ease; }
+    .flip-card.flipped .flip-back { display: flex; align-items: center; animation: flipReveal 0.35s ease; }
     @keyframes flipReveal { from { opacity: 0; transform: perspective(500px) rotateY(-70deg); } to { opacity: 1; transform: perspective(500px) rotateY(0deg); } }
   </style>
 

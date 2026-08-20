@@ -396,6 +396,7 @@
     .service-card.featured   { border-color: var(--orange); }
     .service-card.speaking   { border-color: var(--red); }
     .service-card.workshops  { border-color: var(--lime); }
+    .service-card.coaching   { border-color: var(--blue); }
 
     .service-tag {
       display: inline-block;
@@ -409,9 +410,10 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .service-tag.lead  { background: var(--orange); color: var(--white); }
-    .service-tag.speak { background: var(--red);    color: var(--white); }
-    .service-tag.work  { background: var(--lime);   color: var(--white); }
+    .service-tag.lead   { background: var(--orange); color: var(--white); }
+    .service-tag.speak  { background: var(--red);    color: var(--white); }
+    .service-tag.work   { background: var(--lime);   color: var(--white); }
+    .service-tag.coach  { background: var(--blue);   color: var(--white); }
 
     .service-card h3 {
       font-size: 1.3rem;
@@ -440,9 +442,10 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .service-card.featured .service-solution { color: var(--orange); }
-    .service-card.speaking .service-solution { color: var(--red); }
+    .service-card.featured .service-solution  { color: var(--orange); }
+    .service-card.speaking .service-solution  { color: var(--red); }
     .service-card.workshops .service-solution { color: var(--lime); }
+    .service-card.coaching .service-solution  { color: var(--blue); }
 
     /* ── LOGOS ── */
     #logos {
@@ -1022,6 +1025,13 @@
         <h3>Training doesn't actually change behaviour.</h3>
         <p>Not just for teams that are struggling. For teams that are good and want to be better. Hands-on sessions that give people skills they're still using a month later.</p>
         <span class="service-solution">Workshops and Facilitation →</span>
+      </a>
+
+      <a href="peer-coaching/" class="service-card coaching fade-up" style="text-decoration:none;color:inherit;">
+        <span class="service-tag coach">Coming soon</span>
+        <h3>A room where everyone has your back.</h3>
+        <p>Groups of 6-8 people who meet monthly to think out loud, support each other, and figure out what's next together.</p>
+        <span class="service-solution">Peer Coaching →</span>
       </a>
     </div>
   </section>

@@ -145,20 +145,66 @@
       <span class="section-label">Who this is for</span>
       <h2 class="section-headline">You're not lost. You just don't have the right room yet.</h2>
       <p class="section-body">Peer coaching is for people in transition. People who are working something out and need more than a sounding board. You want people who show up consistently, ask real questions, and won't just tell you what you want to hear.</p>
-      <div class="for-grid">
-        <div class="for-card">
-          <h3>Navigating a career shift</h3>
-          <p>You've been laid off, made redundant, or you've walked away from something. You know what you're leaving. You're still figuring out where you're heading.</p>
+      <div class="accordion" style="margin-top: 2rem;">
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>People navigating a career shift</strong></button>
+          <div class="accordion-body">You've been laid off, made redundant, or you've walked away from something. You know what you're leaving. You're still figuring out where you're heading.</div>
         </div>
-        <div class="for-card">
-          <h3>Building something new</h3>
-          <p>You're starting a business or a project, and the people in your life are supportive but don't quite get it. You need people who are in it too.</p>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>People building something new</strong></button>
+          <div class="accordion-body">You're starting a business or a project, and the people in your life are supportive but don't quite get it. You need people who are in it too.</div>
         </div>
-        <div class="for-card">
-          <h3>Figuring out what's next</h3>
-          <p>Something needs to change and you know it. You're not ready for a coach and you're too far along for a mentor. You need a room where you can think out loud.</p>
+        <div class="accordion-item">
+          <button class="accordion-trigger"><strong>People figuring out what's next</strong></button>
+          <div class="accordion-body">Something needs to change and you know it. You want a room where you can think out loud, with people who ask real questions and won't just tell you what you want to hear.</div>
         </div>
       </div>
+
+      <style>
+        .accordion { border-top: 1px solid rgba(0,0,0,0.1); }
+        .accordion-item { border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .accordion-trigger {
+          width: 100%; text-align: left; background: none; border: none;
+          padding: 1.25rem 2.5rem 1.25rem 3rem; cursor: pointer;
+          font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400;
+          color: var(--text); position: relative; line-height: 1.4;
+          transition: color 0.2s;
+        }
+        .accordion-trigger:hover { color: var(--blue); }
+        .accordion-trigger::before {
+          content: '';
+          position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+          width: 20px; height: 20px;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,8 C26,6 8,22 6,46 C4,68 18,88 42,94 C66,100 88,86 94,64 C100,42 88,18 66,10 C58,7 54,8 50,8 Z' fill='none' stroke='%238DC63F' stroke-width='7' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='4,1'/%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-size: contain;
+        }
+        .accordion-trigger::after {
+          content: '+'; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+          font-size: 1.5rem; font-weight: 400; color: var(--blue);
+          transition: transform 0.25s;
+        }
+        .accordion-trigger.open::after { content: '+'; transform: translateY(-50%) rotate(45deg); }
+        .accordion-body {
+          font-size: 0.95rem; line-height: 1.8; color: #555;
+          max-height: 0; overflow: hidden;
+          transition: max-height 0.3s ease, padding 0.3s ease;
+          padding: 0 2.5rem 0 0;
+        }
+        .accordion-body.open { max-height: 200px; padding-bottom: 1.25rem; }
+      </style>
+
+      <script>
+        document.querySelectorAll('.accordion-trigger').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const body = btn.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+            document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+            document.querySelectorAll('.accordion-trigger').forEach(b => b.classList.remove('open'));
+            if (!isOpen) { body.classList.add('open'); btn.classList.add('open'); }
+          });
+        });
+      </script>
     </div>
   </section>
 

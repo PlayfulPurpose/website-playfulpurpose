@@ -482,16 +482,20 @@
     .testimonials-carousel {
       max-width: 720px;
       margin: 3rem auto 0;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .carousel-viewport {
       overflow: hidden;
       border-radius: 16px;
+      width: 100%;
     }
 
     .testimonials-track {
       display: flex;
       transition: transform 0.45s ease;
+      width: 100%;
     }
 
     .carousel-controls {
@@ -531,12 +535,14 @@
       background: var(--white);
       border: 2px solid transparent;
       border-radius: 16px;
-      padding: 2rem;
-      min-width: 100%;
-      flex-shrink: 0;
+      padding: 3rem;
+      flex: 0 0 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
+      min-height: 280px;
     }
 
     .testimonial-card.orange-accent { border-color: var(--orange); }
@@ -1134,7 +1140,8 @@
       }
       function goTo(n) {
         current = ((n % N) + N) % N;
-        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        const w = track.parentElement.offsetWidth;
+        track.style.transform = 'translateX(-' + (current * w) + 'px)';
         document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
         resetTimer();
       }

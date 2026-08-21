@@ -479,43 +479,60 @@
     /* ── TESTIMONIALS ── */
     #testimonials { background: var(--offwhite); }
 
-    .testimonials-marquee {
-      overflow: hidden;
-      position: relative;
-      margin-top: 3rem;
+    .testimonials-carousel {
+      max-width: 720px;
+      margin: 3rem auto 0;
     }
 
-    .testimonials-marquee::before,
-    .testimonials-marquee::after {
-      content: '';
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 80px;
-      z-index: 2;
-      pointer-events: none;
+    .carousel-viewport {
+      overflow: hidden;
+      border-radius: 16px;
     }
-    .testimonials-marquee::before { left: 0; background: linear-gradient(to right, var(--offwhite), transparent); }
-    .testimonials-marquee::after  { right: 0; background: linear-gradient(to left,  var(--offwhite), transparent); }
 
     .testimonials-track {
       display: flex;
-      gap: 1.5rem;
-      width: max-content;
-      animation: scroll-testimonials 45s linear infinite;
+      transition: transform 0.45s ease;
     }
-    .testimonials-track:hover { animation-play-state: paused; }
 
-    @keyframes scroll-testimonials {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-top: 1.75rem;
     }
+
+    .carousel-btn {
+      background: none;
+      border: 2px solid rgba(0,0,0,0.15);
+      border-radius: 50%;
+      width: 44px; height: 44px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      color: var(--text);
+      line-height: 1;
+    }
+    .carousel-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+    .carousel-dots { display: flex; gap: 0.5rem; align-items: center; }
+
+    .carousel-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.2);
+      border: none; cursor: pointer; padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.active { background: var(--orange); transform: scale(1.35); }
 
     .testimonial-card {
       background: var(--white);
       border: 2px solid transparent;
       border-radius: 16px;
       padding: 2rem;
-      width: 380px;
+      min-width: 100%;
       flex-shrink: 0;
       box-shadow: 0 2px 12px rgba(0,0,0,0.06);
       display: flex;
@@ -1049,55 +1066,90 @@
     <span class="section-label fade-up">What people say</span>
     <h2 class="section-headline fade-up">The sceptics become the converts.</h2>
 
-    <div class="testimonials-marquee fade-up">
-      <div class="testimonials-track" id="testimonials-track">
-        <div class="testimonial-card orange-accent">
-          <div class="quote-mark">"</div>
-          <blockquote>Julie led improv games at our executive offsite. I was hesitant this kind of activity would be relevant for team building. Despite my scepticism, not only were they fun, they strengthened our ability to collaborate. In the end I saw the value and was keen to try these exercises with my own teams.</blockquote>
-          <div class="testimonial-attribution">
-            <strong>Freddie Jansen van Nieuwenhuizen</strong>
-            <span>Former Telstra Executive</span>
+    <div class="testimonials-carousel fade-up">
+      <div class="carousel-viewport">
+        <div class="testimonials-track" id="testimonials-track">
+          <div class="testimonial-card orange-accent">
+            <div class="quote-mark">"</div>
+            <blockquote>Julie led improv games at our executive offsite. I was hesitant this kind of activity would be relevant for team building. Despite my scepticism, not only were they fun, they strengthened our ability to collaborate. In the end I saw the value and was keen to try these exercises with my own teams.</blockquote>
+            <div class="testimonial-attribution">
+              <strong>Freddie Jansen van Nieuwenhuizen</strong>
+              <span>Former Telstra Executive</span>
+            </div>
           </div>
-        </div>
-
-        <div class="testimonial-card red-accent">
-          <div class="quote-mark">"</div>
-          <blockquote>Big thanks to Julie Trell from Playful Purpose for creating such a safe and engaging environment. We left the session more connected, more aligned, and with a renewed appreciation for the power of play in learning and leadership.</blockquote>
-          <div class="testimonial-attribution">
-            <strong>Siva Navaratnam</strong>
-            <span>Head of Strategic Partnerships, ANZ</span>
+          <div class="testimonial-card red-accent">
+            <div class="quote-mark">"</div>
+            <blockquote>Big thanks to Julie Trell from Playful Purpose for creating such a safe and engaging environment. We left the session more connected, more aligned, and with a renewed appreciation for the power of play in learning and leadership.</blockquote>
+            <div class="testimonial-attribution">
+              <strong>Siva Navaratnam</strong>
+              <span>Head of Strategic Partnerships, ANZ</span>
+            </div>
           </div>
-        </div>
-
-        <div class="testimonial-card lime-accent">
-          <div class="quote-mark">"</div>
-          <blockquote>Julie builds on her years of experience with startups and corporates in presenting a workshop so engaging that you lose track of how much you learn so fast. A great session ahead of hard conversations and negotiations. Thoroughly recommend.</blockquote>
-          <div class="testimonial-attribution">
-            <strong>Joanne Jacobs</strong>
-            <span>Co-CEO, Disruptors Co (at CSIRO)</span>
+          <div class="testimonial-card lime-accent">
+            <div class="quote-mark">"</div>
+            <blockquote>Julie builds on her years of experience with startups and corporates in presenting a workshop so engaging that you lose track of how much you learn so fast. A great session ahead of hard conversations and negotiations. Thoroughly recommend.</blockquote>
+            <div class="testimonial-attribution">
+              <strong>Joanne Jacobs</strong>
+              <span>Co-CEO, Disruptors Co (at CSIRO)</span>
+            </div>
           </div>
-        </div>
-
-        <div class="testimonial-card orange-accent">
-          <div class="quote-mark">"</div>
-          <blockquote>I observe a lot of these workshops from the back of the room, and I have never witnessed so much positive energy in a room before! I love your facilitation style - inclusive, respectful, and empathetic. You read the room exceptionally well and ensured everyone felt included.</blockquote>
-          <div class="testimonial-attribution">
-            <strong>Kate</strong>
-            <span>Careers Corporate Relations Manager, MBA Programs, University of Sydney</span>
+          <div class="testimonial-card orange-accent">
+            <div class="quote-mark">"</div>
+            <blockquote>I observe a lot of these workshops from the back of the room, and I have never witnessed so much positive energy in a room before! I love your facilitation style - inclusive, respectful, and empathetic. You read the room exceptionally well and ensured everyone felt included.</blockquote>
+            <div class="testimonial-attribution">
+              <strong>Kate</strong>
+              <span>Careers Corporate Relations Manager, MBA Programs, University of Sydney</span>
+            </div>
           </div>
-        </div>
-
-        <div class="testimonial-card red-accent">
-          <div class="quote-mark">"</div>
-          <blockquote>Julie's techniques of "Yes, And" and "What I Like About That" have been transformative. Using these practices with my team has made everything more productive and positive. These are invaluable tools.</blockquote>
-          <div class="testimonial-attribution">
-            <strong>Claudia Holt</strong>
-            <span>Founder, Wild Yeast Zoo</span>
+          <div class="testimonial-card red-accent">
+            <div class="quote-mark">"</div>
+            <blockquote>Julie's techniques of "Yes, And" and "What I Like About That" have been transformative. Using these practices with my team has made everything more productive and positive. These are invaluable tools.</blockquote>
+            <div class="testimonial-attribution">
+              <strong>Claudia Holt</strong>
+              <span>Founder, Wild Yeast Zoo</span>
+            </div>
           </div>
         </div>
       </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carousel-prev" aria-label="Previous">&#8592;</button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <button class="carousel-btn" id="carousel-next" aria-label="Next">&#8594;</button>
+      </div>
     </div>
   </section>
+  <script>
+    (function() {
+      const track = document.getElementById('testimonials-track');
+      const dotsEl = document.getElementById('carousel-dots');
+      const cards = track.querySelectorAll('.testimonial-card');
+      const N = cards.length;
+      let current = 0, timer;
+      for (let i = 0; i < N; i++) {
+        const d = document.createElement('button');
+        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Slide ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dotsEl.appendChild(d);
+      }
+      function goTo(n) {
+        current = ((n % N) + N) % N;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        document.querySelectorAll('.carousel-dot').forEach((d, i) => d.classList.toggle('active', i === current));
+        resetTimer();
+      }
+      function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1), 5000);
+      }
+      document.getElementById('carousel-prev').addEventListener('click', () => goTo(current - 1));
+      document.getElementById('carousel-next').addEventListener('click', () => goTo(current + 1));
+      const carousel = track.closest('.testimonials-carousel');
+      carousel.addEventListener('mouseenter', () => clearInterval(timer));
+      carousel.addEventListener('mouseleave', resetTimer);
+      resetTimer();
+    })();
+  </script>
 
   <!-- ABOUT -->
   <section id="about">
